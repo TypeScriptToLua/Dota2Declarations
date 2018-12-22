@@ -2114,8 +2114,8 @@ declare abstract class CDOTA_Ability_DataDriven extends CDOTABaseAbility {
     ApplyDataDrivenThinker(hCaster: CDOTA_BaseNPC, vLocation: Vector, pszModifierName: string, hModifierTable: table): table;
 }
 
-/** !NoClassOr */
-/** !PureAbstract */
+/** @noClassOr */
+/** @pureAbstract */
 declare abstract class CDOTA_Ability_Lua extends CDOTABaseAbility {
     /**
      * Determine whether an issued command with no target is valid.
@@ -4092,7 +4092,7 @@ declare abstract class CDOTA_Item_DataDriven extends CDOTA_Item {
     ApplyDataDrivenThinker(hCaster: CDOTA_BaseNPC, vLocation: Vector, pszModifierName: string, hModifierTable: table): CBaseEntity;
 }
 
-/** !PureAbstract */
+/** @pureAbstract */
 declare abstract class CDOTA_Item_Lua extends CDOTA_Item {
     /**
      * Determine whether an issued command with no target is valid.
@@ -4306,7 +4306,7 @@ declare abstract class CDOTA_MapTree extends CBaseEntity {
     IsStanding(): boolean;
 }
 
-/** !PureAbstract */
+/** @pureAbstract */
 declare abstract class CDOTA_Modifier_Lua_Horizontal_Motion extends CDOTA_Modifier_Lua {
     /**
      * Starts the horizontal motion controller effects for this buff.  Returns true if successful.
@@ -4330,7 +4330,7 @@ declare abstract class CDOTA_Modifier_Lua_Horizontal_Motion extends CDOTA_Modifi
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void;
 }
 
-/** !PureAbstract */
+/** @pureAbstract */
 declare abstract class CDOTA_Modifier_Lua_Motion_Both extends CDOTA_Modifier_Lua {
     /**
      * Starts the horizontal motion controller effects for this buff.  Returns true if successful.
@@ -4366,7 +4366,7 @@ declare abstract class CDOTA_Modifier_Lua_Motion_Both extends CDOTA_Modifier_Lua
     UpdateVerticalMotion(me: CDOTA_BaseNPC, dt: number): void;
 }
 
-/** !PureAbstract */
+/** @pureAbstract */
 declare abstract class CDOTA_Modifier_Lua_Vertical_Motion extends CDOTA_Modifier_Lua {
     /**
      * Starts the vertical motion controller effects for this buff.  Returns true if successful.
