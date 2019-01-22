@@ -912,7 +912,7 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
     /**
      * Returns if the caster has enough gold to cast this ability.
      */
-    IsOwnersGoldEnough(nIssuerPlayerID: number): boolean;
+    IsOwnersGoldEnough(nIssuerPlayerID: PlayerID): boolean;
     /**
      * Returns if the caster has enough gold to upgrade this ability.
      */
@@ -962,7 +962,7 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
     /**
      * Event fired when the ability is alt clicked. Returns the player that pinged it.
      */
-    OnAbilityPinged(nPlayerID: number, ctrlHeld: boolean): void;
+    OnAbilityPinged(nPlayerID: PlayerID, ctrlHeld: boolean): void;
     /**
      * Event fired when the ability stops channeling. Returns whether the channel has expired or was interrupted.
      */
@@ -3846,7 +3846,7 @@ interface CDOTA_BaseNPC_Hero extends CDOTA_BaseNPC {
     /**
      * Set the player's ID.
      */
-    SetPlayerID(iPlayerID: number): void;
+    SetPlayerID(iPlayerID: PlayerID): void;
     /**
      * Set this hero's primary attribute value.
      */
@@ -4533,7 +4533,7 @@ interface CDOTA_PlayerResource {
     /**
      * (playerID, entity) - force the given player's camera to follow the given entity
      */
-    SetCameraTarget(nPlayerID: PlayerID, hTarget: CDOTA_BaseNPC): void;
+    SetCameraTarget(nPlayerID: PlayerID, hTarget: CDOTA_BaseNPC | undefined): void;
     SetCanRepick(iPlayerID: PlayerID, bCanRepick: boolean): void;
     /**
      * Set the buyback cooldown for this player.
@@ -5053,7 +5053,7 @@ interface CScriptParticleManager {
      * Set the control point data for a control on a particle effect
      */
     SetParticleControl(particle: ParticleID, controlPoint: number, value: Vector): void;
-    SetParticleControlEnt(particle: ParticleID, controlPoint: number, unit: CDOTA_BaseNPC, particleAttach: ParticleAttachment_t, attachment: string, offset: Vector, lockOrientation: boolean): void;
+    SetParticleControlEnt(particle: ParticleID, controlPoint: number, unit: CDOTA_BaseNPC, particleAttach: ParticleAttachment_t, attachment: string | undefined, offset: Vector, lockOrientation: boolean): void;
     /**
      * (int iIndex, int iPoint, Vector vecPosition)
      */
@@ -5230,7 +5230,7 @@ declare function CreateItemOnPositionSync(location: Vector, item: CDOTA_Item): C
 /**
  * Create a modifier not associated with an NPC. ( hCaster, hAbility, modifierName, paramTable, vOrigin, nTeamNumber, bPhantomBlocker )
  */
-declare function CreateModifierThinker(caster: CDOTA_BaseNPC, ability: CDOTABaseAbility, modifierName: string, params: table, arg5: Vector, arg6: number, arg7: boolean): CBaseEntity;
+declare function CreateModifierThinker(caster: CDOTA_BaseNPC | undefined, ability: CDOTABaseAbility | undefined, modifierName: string, params: table, arg5: Vector, arg6: number, arg7: boolean): CBaseEntity;
 /**
  * Create a scene entity to play the specified scene.
  */
@@ -5502,7 +5502,7 @@ declare function GetTargetAOELocation(arg1: number, arg2: number, arg3: number, 
 /**
  * Get a target from a linear location? Details unknown.
  */
-declare function GetTargetLinearLocation(arg1: number, arg2: number, arg3: number, arg4: Vector, arg4: number, arg6: number, arg7: number): any;
+declare function GetTargetLinearLocation(arg1: number, arg2: number, arg3: number, arg4: Vector, arg5: number, arg6: number, arg7: number): any;
 /**
  * ( int teamID )
  */

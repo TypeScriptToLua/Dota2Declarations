@@ -7,6 +7,7 @@ declare interface IVector {
     Dot(other: Vector): number;
     Cross(other: Vector): Vector;
     Length(): number;
+    Length2D(): number;
     Normalized(): Vector;
 }
 

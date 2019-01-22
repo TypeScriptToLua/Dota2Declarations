@@ -74,7 +74,7 @@ declare function ListenToGameEvent<T>(eventName: "player_chat", callback: (conte
 interface PlayerChatEvent {
     teamonly: boolean;
     userid: number;
-    playerid: number;
+    playerid: PlayerID;
     text: string;
 }
 /**
@@ -574,8 +574,8 @@ interface DotaChaseHeroEvent {
     priority: number;
     gametime: number;
     highlight: boolean;
-    target1playerid: number;
-    target2playerid: number;
+    target1playerid: PlayerID;
+    target2playerid: PlayerID;
     eventtype: number;
 }
 /**
@@ -665,7 +665,7 @@ declare function ListenToGameEvent(eventName: "dota_barracks_kill", callback: (e
 declare function ListenToGameEvent<T>(eventName: "dota_barracks_kill", callback: (context: T, event: DotaBarracksKillEvent) => void, context: T): EventListenerID;
 interface DotaBarracksKillEvent {
     barracks_id: number;
-    killer_playerid: number;
+    killer_playerid: PlayerID;
     killer_team: number;
 }
 /**
@@ -922,7 +922,7 @@ declare function ListenToGameEvent(eventName: "dota_player_update_killcam_unit",
 declare function ListenToGameEvent(eventName: "dota_player_take_tower_damage", callback: (event: DotaPlayerTakeTowerDamageEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_take_tower_damage", callback: (context: T, event: DotaPlayerTakeTowerDamageEvent) => void, context: T): EventListenerID;
 interface DotaPlayerTakeTowerDamageEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     damage: number;
 }
 /**
@@ -999,7 +999,7 @@ declare function ListenToGameEvent(eventName: "dota_item_picked_up", callback: (
 declare function ListenToGameEvent<T>(eventName: "dota_item_picked_up", callback: (context: T, event: DotaItemPickedUpEvent) => void, context: T): EventListenerID;
 interface DotaItemPickedUpEvent {
     itemname: string;
-    PlayerID: number;
+    PlayerID: PlayerID;
     ItemEntityIndex: number;
     HeroEntityIndex: number;
 }
@@ -1026,7 +1026,7 @@ declare function ListenToGameEvent(eventName: "dota_spectator_talent_changed", c
 declare function ListenToGameEvent<T>(eventName: "dota_spectator_talent_changed", callback: (context: T, event: DotaSpectatorTalentChangedEvent) => void, context: T): EventListenerID;
 interface DotaSpectatorTalentChangedEvent {
     abilityname: string;
-    playerid: number;
+    playerid: PlayerID;
 }
 /**
  * Register as a listener for a game event from script.
@@ -1244,7 +1244,7 @@ declare function ListenToGameEvent(eventName: "dashboard_caches_cleared", callba
 declare function ListenToGameEvent(eventName: "last_hit", callback: (event: LastHitEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "last_hit", callback: (context: T, event: LastHitEvent) => void, context: T): EventListenerID;
 interface LastHitEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     EntKilled: number;
     FirstBlood: boolean;
     HeroKill: boolean;
@@ -1256,7 +1256,7 @@ interface LastHitEvent {
 declare function ListenToGameEvent(eventName: "player_completed_game", callback: (event: PlayerCompletedGameEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "player_completed_game", callback: (context: T, event: PlayerCompletedGameEvent) => void, context: T): EventListenerID;
 interface PlayerCompletedGameEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     Winner: number;
 }
 /**
@@ -1265,7 +1265,7 @@ interface PlayerCompletedGameEvent {
 declare function ListenToGameEvent(eventName: "player_reconnected", callback: (event: PlayerReconnectedEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "player_reconnected", callback: (context: T, event: PlayerReconnectedEvent) => void, context: T): EventListenerID;
 interface PlayerReconnectedEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
 }
 /**
  * Register as a listener for a game event from script.
@@ -1273,7 +1273,7 @@ interface PlayerReconnectedEvent {
 declare function ListenToGameEvent(eventName: "nommed_tree", callback: (event: NommedTreeEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "nommed_tree", callback: (context: T, event: NommedTreeEvent) => void, context: T): EventListenerID;
 interface NommedTreeEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
 }
 /**
  * Register as a listener for a game event from script.
@@ -1281,7 +1281,7 @@ interface NommedTreeEvent {
 declare function ListenToGameEvent(eventName: "dota_rune_activated_server", callback: (event: DotaRuneActivatedServerEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_rune_activated_server", callback: (context: T, event: DotaRuneActivatedServerEvent) => void, context: T): EventListenerID;
 interface DotaRuneActivatedServerEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     rune: number;
 }
 /**
@@ -1290,7 +1290,7 @@ interface DotaRuneActivatedServerEvent {
 declare function ListenToGameEvent(eventName: "dota_player_gained_level", callback: (event: DotaPlayerGainedLevelEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_gained_level", callback: (context: T, event: DotaPlayerGainedLevelEvent) => void, context: T): EventListenerID;
 interface DotaPlayerGainedLevelEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     level: number;
 }
 /**
@@ -1299,7 +1299,7 @@ interface DotaPlayerGainedLevelEvent {
 declare function ListenToGameEvent(eventName: "dota_player_learned_ability", callback: (event: DotaPlayerLearnedAbilityEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_learned_ability", callback: (context: T, event: DotaPlayerLearnedAbilityEvent) => void, context: T): EventListenerID;
 interface DotaPlayerLearnedAbilityEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     player: number;
     abilityname: string;
 }
@@ -1309,7 +1309,7 @@ interface DotaPlayerLearnedAbilityEvent {
 declare function ListenToGameEvent(eventName: "dota_player_used_ability", callback: (event: DotaPlayerUsedAbilityEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_used_ability", callback: (context: T, event: DotaPlayerUsedAbilityEvent) => void, context: T): EventListenerID;
 interface DotaPlayerUsedAbilityEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     abilityname: string;
     caster_entindex: number;
 }
@@ -1327,7 +1327,7 @@ interface DotaNonPlayerUsedAbilityEvent {
 declare function ListenToGameEvent(eventName: "dota_player_begin_cast", callback: (event: DotaPlayerBeginCastEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_begin_cast", callback: (context: T, event: DotaPlayerBeginCastEvent) => void, context: T): EventListenerID;
 interface DotaPlayerBeginCastEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     abilityname: string;
 }
 /**
@@ -1363,7 +1363,7 @@ interface DotaHoldoutReviveCompleteEvent {
 declare function ListenToGameEvent(eventName: "dota_player_killed", callback: (event: DotaPlayerKilledEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_killed", callback: (context: T, event: DotaPlayerKilledEvent) => void, context: T): EventListenerID;
 interface DotaPlayerKilledEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     HeroKill: boolean;
     TowerKill: boolean;
 }
@@ -1408,7 +1408,7 @@ declare function ListenToGameEvent(eventName: "dota_shop_item_drag_end", callbac
 declare function ListenToGameEvent(eventName: "dota_item_purchased", callback: (event: DotaItemPurchasedEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_item_purchased", callback: (context: T, event: DotaItemPurchasedEvent) => void, context: T): EventListenerID;
 interface DotaItemPurchasedEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     itemname: string;
     itemcost: number;
 }
@@ -1418,7 +1418,7 @@ interface DotaItemPurchasedEvent {
 declare function ListenToGameEvent(eventName: "dota_item_combined", callback: (event: DotaItemCombinedEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_item_combined", callback: (context: T, event: DotaItemCombinedEvent) => void, context: T): EventListenerID;
 interface DotaItemCombinedEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     itemname: string;
     itemcost: number;
 }
@@ -1428,7 +1428,7 @@ interface DotaItemCombinedEvent {
 declare function ListenToGameEvent(eventName: "dota_item_used", callback: (event: DotaItemUsedEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_item_used", callback: (context: T, event: DotaItemUsedEvent) => void, context: T): EventListenerID;
 interface DotaItemUsedEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
     itemname: string;
 }
 /**
@@ -2187,7 +2187,7 @@ interface DotaYearBeastKilledEvent {
 declare function ListenToGameEvent(eventName: "dota_player_spawned", callback: (event: DotaPlayerSpawnedEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_spawned", callback: (context: T, event: DotaPlayerSpawnedEvent) => void, context: T): EventListenerID;
 interface DotaPlayerSpawnedEvent {
-    PlayerID: number;
+    PlayerID: PlayerID;
 }
 /**
  * Register as a listener for a game event from script.
@@ -2277,7 +2277,7 @@ declare function ListenToGameEvent(eventName: "custom_games_friends_play_updated
 declare function ListenToGameEvent(eventName: "dota_player_update_assigned_hero", callback: (event: DotaPlayerUpdateAssignedHeroEvent) => void, context: null): EventListenerID;
 declare function ListenToGameEvent<T>(eventName: "dota_player_update_assigned_hero", callback: (context: T, event: DotaPlayerUpdateAssignedHeroEvent) => void, context: T): EventListenerID;
 interface DotaPlayerUpdateAssignedHeroEvent {
-    playerid: number;
+    playerid: PlayerID;
 }
 /**
  * Register as a listener for a game event from script.
@@ -2569,7 +2569,7 @@ interface PlayerDisconnectEvent {
     reason: number;
     name: string;
     networkid: string;
-    PlayerID: number;
+    PlayerID: PlayerID;
 }
 /**
  * Register as a listener for a game event from script.
@@ -2587,7 +2587,7 @@ declare function ListenToGameEvent<T>(eventName: "player_connect_full", callback
 interface PlayerConnectFullEvent {
     userid: number;
     index: number;
-    PlayerID: number;
+    PlayerID: PlayerID;
 }
 /**
  * Register as a listener for a game event from script.
