@@ -157,7 +157,7 @@ declare abstract class CBaseEntity extends CEntityInstance {
     /**
      * AddEffects( int ): Adds the render effect flag.
      */
-    AddEffects(nFlags: number): void;
+    AddEffects(nFlags: Effects): void;
     /**
      * Apply a Velocity Impulse
      */
@@ -360,7 +360,7 @@ declare abstract class CBaseEntity extends CEntityInstance {
     /**
      * RemoveEffects( int ): Removes the render effect flag.
      */
-    RemoveEffects(nFlags: number): void;
+    RemoveEffects(nFlags: Effects): void;
     /**
      * Set entity pitch, yaw, roll by component.
      */
@@ -3705,7 +3705,7 @@ interface CDOTA_BaseNPC_Hero extends CDOTA_BaseNPC {
     /**
      * Get wearable entity in slot (slot)
      */
-    GetTogglableWearable(nSlotType: number): CBaseEntity;
+    GetTogglableWearable(nSlotType: DOTASlotType_t): CBaseEntity;
     /**
      * Returns whether this hero has available inventory space.
      */
