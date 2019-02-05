@@ -345,6 +345,10 @@ declare abstract class CBaseEntity extends CEntityInstance {
      */
     IsPlayer(): this is CBasePlayer;
     /**
+     * Detect if the entity has been deleted from C++.
+     */
+    IsNull(): boolean;
+    /**
      * Kill the entity. This kill is not credited to anyone.
      */
     Kill(): void;
