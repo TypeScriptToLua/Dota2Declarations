@@ -5034,15 +5034,15 @@ interface CScriptParticleManager {
     /**
      * Creates a new particle effect
      */
-    CreateParticle(particleName: string, particleAttach: ParticleAttachment_t, owner: CDOTA_BaseNPC | null | undefined): ParticleID;
+    CreateParticle(particleName: string, particleAttach: ParticleAttachment_t, owner: CBaseEntity | null | undefined): ParticleID;
     /**
      * Creates a new particle effect that only plays for the specified player
      */
-    CreateParticleForPlayer(particleName: string, particleAttach: ParticleAttachment_t, owner: CDOTA_BaseNPC | null | undefined, player: CDOTAPlayer): ParticleID;
+    CreateParticleForPlayer(particleName: string, particleAttach: ParticleAttachment_t, owner: CBaseEntity | null | undefined, player: CDOTAPlayer): ParticleID;
     /**
      * Creates a new particle effect that only plays for the specified team
      */
-    CreateParticleForTeam(particleName: string, particleAttach: ParticleAttachment_t, owner: CDOTA_BaseNPC | null | undefined, team: DOTATeam_t): ParticleID;
+    CreateParticleForTeam(particleName: string, particleAttach: ParticleAttachment_t, owner: CBaseEntity | null | undefined, team: DOTATeam_t): ParticleID;
     /**
      * (int index, bool bDestroyImmediately) - Destroy a particle, if bDestroyImmediately destroy it without playing end caps.
      */
@@ -5057,7 +5057,7 @@ interface CScriptParticleManager {
      * Set the control point data for a control on a particle effect
      */
     SetParticleControl(particle: ParticleID, controlPoint: number, value: Vector): void;
-    SetParticleControlEnt(particle: ParticleID, controlPoint: number, unit: CDOTA_BaseNPC, particleAttach: ParticleAttachment_t, attachment: string | undefined, offset: Vector, lockOrientation: boolean): void;
+    SetParticleControlEnt(particle: ParticleID, controlPoint: number, unit: CBaseEntity, particleAttach: ParticleAttachment_t, attachment: string | undefined, offset: Vector, lockOrientation: boolean): void;
     /**
      * (int iIndex, int iPoint, Vector vecPosition)
      */
