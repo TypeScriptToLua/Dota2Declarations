@@ -1,3 +1,5 @@
+/** @noSelfInFile */
+
 /**
  * Register as a listener for a game event from script.
  */

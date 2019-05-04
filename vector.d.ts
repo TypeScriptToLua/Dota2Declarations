@@ -11,4 +11,4 @@ declare interface IVector {
     Normalized(): Vector;
 }
 
-declare function Vector(x?: number, y?: number, z?: number): Vector;
+declare function Vector(this: void, x?: number, y?: number, z?: number): Vector;
