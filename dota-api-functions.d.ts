@@ -788,3 +788,8 @@ declare function rr_GetResponseTargets(): table;
  * Params: (entity, query) : tests 'query' against entity's response system and returns the best response found (or null if none found).
  */
 declare function rr_QueryBestResponse(arg1: table, arg2: table, arg3: table): boolean;
+
+type OnlyFunctions<T> = Pick<T, {[P in keyof T]: T[P] extends Function ? P : never}[keyof T]>;
+
+/** Delayed lookup and execution of a function on an object. */
+declare function Dynamic_Wrap<T, K extends keyof OnlyFunctions<T>>(object: T, name: K): T[K];
