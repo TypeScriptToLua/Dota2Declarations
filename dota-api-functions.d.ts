@@ -292,9 +292,13 @@ declare function FireGameEventLocal(eventName: string, eventData: table): void;
  */
 declare function FrameTime(): number;
 /**
- * Get the dedicated server secret based on some version seed.
+ * [DEPRECATED: Use GetDedicatedServerKeyV2 instead] Get the dedicated server secret based on some version seed.
  */
 declare function GetDedicatedServerKey(version: string): string;
+/**
+ * Get the dedicated server secret based on some version seed.
+ */
+declare function GetDedicatedServerKeyV2(version: string): string;
 /**
  * Get the enity index for a tree id specified as the entindex_target of a DOTA_UNIT_ORDER_CAST_TARGET_TREE.
  */
