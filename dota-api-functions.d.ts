@@ -311,11 +311,11 @@ declare function GetFrameCount(): number;
 /**
  * Returns the height of the ground directly below or above the given location. Second parameter is an NPC for measuring movement collision hull offset.
  */
-declare function GetGroundHeight(location: Vector, unitHull: CDOTA_BaseNPC): number;
+declare function GetGroundHeight(location: Vector, unitHull: CDOTA_BaseNPC | undefined): number;
 /**
  * Returns the supplied position moved to the ground. Second parameter is an NPC for measuring movement collision hull offset.
  */
-declare function GetGroundPosition(location: Vector, unitHull: CDOTA_BaseNPC): Vector;
+declare function GetGroundPosition(location: Vector, unitHull: CDOTA_BaseNPC | undefined): Vector;
 /**
  * Get the cost of an item by name.
  */
