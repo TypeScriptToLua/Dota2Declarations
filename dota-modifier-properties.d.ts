@@ -356,6 +356,8 @@ declare abstract class CDOTA_Modifier_Lua extends CDOTA_Buff {
     GetModifierBountyCreepMultiplier(): number;
     // Not working
     GetModifierBountyOtherMultiplier(): number;
+
+    GetVisualZDelta(): number;
     /**
      *  Untested
      */
