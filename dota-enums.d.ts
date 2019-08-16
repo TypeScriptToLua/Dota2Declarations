@@ -1695,7 +1695,7 @@ declare enum modifierfunction {
      */
     MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE_SOURCE,
     /**
-     * GetIgnoreMovespeedLimit
+     * GetModifierIgnoreMovespeedLimit
      */
     MODIFIER_PROPERTY_IGNORE_MOVESPEED_LIMIT,
     /**
