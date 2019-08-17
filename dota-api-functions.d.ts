@@ -83,7 +83,7 @@ interface IllusionModifierKeys {
  * @param hHeroToCopy The hero to make illusions of.
  * @param hModifierKeys Configuration table for illusion stats.
  * @param nNumIllusions The number of illusions to create.
- * @param nPadding ???
+ * @param nPadding Padding distance between hero and illusions.
  * @param bScramblePosition Scramble position of the hero/illusions? 
  * @param bFindClearSpace Find clear space for illusions?
  */
