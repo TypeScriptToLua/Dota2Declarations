@@ -1061,6 +1061,11 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
     SetOverrideCastPoint(flCastPoint: number): void;
     SetRefCountsModifiers(bRefCounts: boolean): void;
     /**
+     * Set if this ability can be stolen by heroes like Rubick. Note: Some abilities in the base game do not have mutable stealability.
+     * @param bStealable True if can be stolen, false otherwise.
+     */
+    SetStealable(bStealable: boolean): void;
+    /**
      * Set whether this ability is marked as stolen.
      */
     SetStolen(bStolen: boolean): void;
@@ -1147,6 +1152,7 @@ interface ModifyExperienceEvent {
     reason_const: EDOTA_ModifyXP_Reason;
     experience: number;
     player_id_const: PlayerID;
+    hero_entindex_const: EntityID;
 }
 
 interface ModifyGoldEvent {
@@ -1245,6 +1251,14 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      */
     GetCustomAttributeDerivedStatValue(nDerivedStatType: AttributeDerivedStats, hero: CDOTA_BaseNPC_Hero): number;
     /**
+     * Get the cooldown for items moved out of the backpack.
+     */
+    GetCustomBackpackSwapCooldown(): number;
+    /**
+     * Get the current percentage modifier for the item backpack swap cooldown.
+     */
+    GetCustomBackpackCooldownPercent(): number;
+    /**
      * Turns on capability to define custom buyback cooldowns.
      */
     GetCustomBuybackCooldownEnabled(): boolean;
@@ -1253,11 +1267,15 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      */
     GetCustomBuybackCostEnabled(): boolean;
     /**
+     * Get current glyph cooldown.
+     */
+    GetCustomGlyphCooldown(): number;
+    /**
      * Allows definition of the max level heroes can achieve (default is 25).
      */
     GetCustomHeroMaxLevel(): number;
     /**
-     * Get the custom set scan cooldown.
+     * Get the current scan cooldown.
      */
     GetCustomScanCooldown(): number;
     /**
@@ -1381,6 +1399,16 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      */
     SetCustomAttributeDerivedStatValue(nStatType: AttributeDerivedStats, flNewValue: number): void;
     /**
+     * Set a custom item cooldown when swapping out of backpack.
+     * @param flCooldown The cooldown of items after moving out of backpack.
+     */
+    SetCustomBackpackSwapCooldown(flCooldown: number): void;
+    /**
+     * Set the cooldown speed of items in the backpack. Regular speed is 1, half speed is 0.5 and 3x speed is 3.
+     * @param flPercent Cooldown speed for items in backpack. (default: 0.5)
+     */
+    SetCustomBackpackCooldownPercent(flPercent: number): void;
+    /**
      * Turns on capability to define custom buyback cooldowns.
      */
     SetCustomBuybackCooldownEnabled(bEnabled: boolean): void;
@@ -1392,6 +1420,11 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      * Force all players to use the specified hero and disable the normal hero selection process. Must be used before hero selection.
      */
     SetCustomGameForceHero(pHeroName: string): void;
+    /**
+     * Set a custom cooldown for glyph (building fortification).
+     * @param flCooldown The new glyph cooldown in seconds. (default: 300)
+     */
+    SetCustomGlyphCooldown(flCooldown: number): void;
     /**
      * Allows definition of the max level heroes can achieve (default is 25).
      */
@@ -1950,7 +1983,7 @@ interface CDOTAGamerules {
 declare const GameRules: CDOTAGamerules;
 
 /**
- * dota_player
+ * A handle representing a Dota player.
  */
 declare abstract class CDOTAPlayer extends CBaseAnimating {
     /**
@@ -1965,6 +1998,11 @@ declare abstract class CDOTAPlayer extends CBaseAnimating {
      * Randoms this player's hero.
      */
     MakeRandomHeroSelection(): void;
+    /**
+     * Set this player's assigned hero.
+     * @param hHero The hero handle to assign.
+     */
+    SetAssignedHeroEntity(hHero: CDOTA_BaseNPC_Hero): void;
     /**
      * Set the kill cam unit for this hero.
      */
@@ -2230,6 +2268,12 @@ declare abstract class CDOTA_Ability_Lua extends CDOTABaseAbility {
      */
     OnAbilityPhaseInterrupted(): void;
     /**
+     * This ability was pinged.
+     * @param nPlayerID The player pinging the ability.
+     * @param bCtrlHeld Was control held or not.
+     */
+    OnAbilityPinged(nPlayerID: PlayerID, bCtrlHeld: boolean): void;
+    /**
      * Cast time begins (return true for successful cast).
      */
     OnAbilityPhaseStart(): boolean;
@@ -2317,6 +2361,10 @@ declare abstract class CDOTA_Ability_Lua extends CDOTABaseAbility {
      * Returns true if this ability will generate magic stick charges for nearby enemies.
      */
     ProcsMagicStick(): boolean;
+    /**
+     * Return true if the toggle state of this ability resets on respawn.
+     */
+    ResetToggleOnRespawn(): boolean;
     /**
      * Return the type of speech used.
      */
@@ -2541,6 +2589,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      */
     GetBonusManaRegen(): number;
     GetCastPoint(bAttack: boolean): number;
+    GetCastRangeBonus(): number;
     /**
      * Get clone source (Meepo Prime, if this is a Meepo)
      */
@@ -2549,6 +2598,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Returns the size of the collision padding around the hull.
      */
     GetCollisionPadding(): number;
+    GetCooldownReduction(): number;
     /**
      * Get the dota game time in which this unit first respawned.
      */
@@ -2572,6 +2622,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Get the XP bounty on this unit.
      */
     GetDeathXP(): number;
+    GetDisplayAttackSpeed(): number;
     /**
      * Get this unit's evasion.
      */
@@ -2932,6 +2983,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Is this unit an illusion?
      */
     IsIllusion(): boolean;
+    IsInRangeOfShop(nShopType: DOTA_SHOP_TYPE, bPhysicallyNear: boolean): boolean;
     /**
      * Is this unit invisible?
      */
@@ -3321,6 +3373,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Set the maximum gold bounty for this unit.
      */
     SetMaximumGoldBounty(iGoldBountyMax: number): void;
+    SetMaxMana(nMaxMany: number): void;
     /**
      * Set the minimum gold bounty for this unit.
      */
@@ -3931,6 +3984,7 @@ declare abstract class CDOTA_Buff {
      * Returns aura stickiness (default 0.5)
      */
     GetAuraDuration(): number;
+    GetAuraOwner(): CDOTA_BaseNPC;
     /**
      * Get the owner of the ability responsible for the modifier.
      */
@@ -3950,12 +4004,15 @@ declare abstract class CDOTA_Buff {
      */
     GetParent(): CDOTA_BaseNPC;
     GetRemainingTime(): number;
+    GetSerialNumber(): number;
     GetStackCount(): number;
     HasFunction(iFunction: number): boolean;
     /**
      * Increase this modifier's stack count by 1.
      */
     IncrementStackCount(): void;
+    IsDebuff(): boolean;
+    IsHexDebuff(): boolean;
     IsStunDebuff(): boolean;
     /**
      * (flTime, bInformClients)
@@ -4008,6 +4065,10 @@ declare abstract class CDOTA_Item extends CDOTABaseAbility {
      */
     GetInitialCharges(): number;
     /**
+     * Get the inventory slot this item is in.
+     */
+    GetItemSlot(): DOTAScriptInventorySlot_t;
+    /**
      * Gets whether item is unequipped or ready.
      */
     GetItemState(): number;
@@ -4023,6 +4084,7 @@ declare abstract class CDOTA_Item extends CDOTABaseAbility {
      * Get the purchaser for this item.
      */
     GetPurchaser(): CDOTA_BaseNPC;
+    GetSecondaryCharges(): number;
     GetShareability(): EShareAbility;
     IsAlertableItem(): boolean;
     IsCastOnPickup(): boolean;
@@ -4063,6 +4125,7 @@ declare abstract class CDOTA_Item extends CDOTABaseAbility {
      * Set the purchaser of record for this item.
      */
     SetPurchaser(hPurchaser: CDOTA_BaseNPC): void;
+    SetSecondaryCharges(nCharges: number): void
     SetSellable(bSellable: boolean): void;
     SetShareability(iShareability: EShareAbility): void;
     SetStacksWithOtherOwners(bStacksWithOtherOwners: boolean): void;

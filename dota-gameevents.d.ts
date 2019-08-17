@@ -2599,3 +2599,19 @@ interface PlayerFullUpdateEvent {
     userid: number;
     count: number;
 }
+/**
+ * Register as a listener for a game event from script.
+ */
+declare function ListenToGameEvent(eventName: "dota_scan_used", callback: (event: ScanUsedEvent) => void, context: null | undefined): EventListenerID;
+declare function ListenToGameEvent<T>(eventName: "dota_scan_used", callback: (context: T, event: ScanUsedEvent) => void, context: T): EventListenerID;
+interface ScanUsedEvent {
+    teamnumber: DOTATeam_t;
+}
+/**
+ * Register as a listener for a game event from script.
+ */
+declare function ListenToGameEvent(eventName: "dota_glyph_used", callback: (event: GlyphUsedEvent) => void, context: null | undefined): EventListenerID;
+declare function ListenToGameEvent<T>(eventName: "dota_glyph_used", callback: (context: T, event: GlyphUsedEvent) => void, context: T): EventListenerID;
+interface GlyphUsedEvent {
+    teamnumber: DOTATeam_t;
+}

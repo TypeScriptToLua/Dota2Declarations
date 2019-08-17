@@ -67,6 +67,29 @@ declare function CreateHTTPRequestScriptVM(method: string, url: string): CScript
  */
 declare function CreateHeroForPlayer(heroName: string, player: CDOTAPlayer): CDOTA_BaseNPC_Hero;
 /**
+ * Configuration table for creating illusions.
+ */
+interface IllusionModifierKeys {
+    outgoing_damage?: number;
+    incoming_damage?: number;
+    bounty_base?: number;
+    bounty_growth?: number;
+    outgoing_damage_structure?: number;
+    outgoing_damage_roshan?: number;
+}
+/**
+ * Create one or more illusions.
+ * @param hOwner The handle of the owner of the illusions.
+ * @param hHeroToCopy The hero to make illusions of.
+ * @param hModifierKeys Configuration table for illusion stats.
+ * @param nNumIllusions The number of illusions to create.
+ * @param nPadding ???
+ * @param bScramblePosition Scramble position of the hero/illusions? 
+ * @param bFindClearSpace Find clear space for illusions?
+ */
+declare function CreateIllusions(hOwner: CDOTA_BaseNPC, hHeroToCopy: CDOTA_BaseNPC_Hero, hModifierKeys: IllusionModifierKeys,
+                                 nNumIllusions: number, nPadding: number, bScramblePosition: boolean, bFindClearSpace: boolean): CDOTA_BaseNPC[];
+/**
  * Create a DOTA item
  */
 declare function CreateItem(itemName: string, owner: CDOTAPlayer, purchaser: CDOTAPlayer): CDOTA_Item;
