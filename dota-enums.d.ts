@@ -1510,6 +1510,10 @@ declare enum modifierfunction {
      */
     MODIFIER_EVENT_ON_ABILITY_END_CHANNEL,
     /**
+     * OnProcessCleave
+     */
+    MODIFIER_EVENT_ON_PROCESS_CLEAVE,
+    /**
      * OnProcessUpgrade
      */
     MODIFIER_EVENT_ON_PROCESS_UPGRADE,
@@ -1683,7 +1687,7 @@ declare enum modifierfunction {
      */
     MODIFIER_EVENT_ON_PROJECTILE_OBSTRUCTION_HIT,
     /**
-     * GetAttackRangeBonusPercentage
+     * GetModifierAttackRangeBonusPercentage
      */
     MODIFIER_PROPERTY_ATTACK_RANGE_BONUS_PERCENTAGE,
     /**
@@ -1691,7 +1695,7 @@ declare enum modifierfunction {
      */
     MODIFIER_PROPERTY_DONT_GIVE_VISION_OF_ATTACKER,
     /**
-     * GetHpRegenAmplifyPercentageSource
+     * GetModifierHPRegenAmplify_PercentageSource
      */
     MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE_SOURCE,
     /**
@@ -1699,11 +1703,11 @@ declare enum modifierfunction {
      */
     MODIFIER_PROPERTY_IGNORE_MOVESPEED_LIMIT,
     /**
-     * GetInvisibilityAttackBehaviorException
+     * GetModifierInvisibilityAttackBehaviorException
      */
-    MODIFIER_PROPERTY_INVISIBILITY_ATTACK_BEHAVIOR_EXCEPTION2,
+    MODIFIER_PROPERTY_INVISIBILITY_ATTACK_BEHAVIOR_EXCEPTION,
     /**
-     * GetMovespeedAbsoluteMax
+     * GetModifierMoveSpeed_AbsoluteMax
      */
     MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE_MAX,
     /**
@@ -1711,15 +1715,15 @@ declare enum modifierfunction {
      */
     MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT_UNIQUE,
     /**
-     * GetMpRestoreAmplifyPercentage
+     * GetModifierMPRestoreAmplify_Percentage
      */
     MODIFIER_PROPERTY_MP_RESTORE_AMPLIFY_PERCENTAGE,
     /**
-     * GetPreattackBonusDamageTarget
+     * GetModifierPreAttack_BonusDamage_Target
      */
     MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE_TARGET,
     /**
-     * GetStatusResistanceCaster
+     * GetModifierStatusResistanceCaster
      */
     MODIFIER_PROPERTY_STATUS_RESISTANCE_CASTER,
     /**

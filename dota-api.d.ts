@@ -1644,7 +1644,7 @@ interface CDOTAGameManager {
     GetHeroUnitNameByID(arg1: number): string;
 }
 /**
- * !DOTA GameRules
+ * DOTA GameRules
  */
 interface CDOTAGamerules {
     /**
