@@ -88,7 +88,7 @@ interface IllusionModifierKeys {
  * @param bFindClearSpace Find clear space for illusions?
  */
 declare function CreateIllusions(hOwner: CDOTA_BaseNPC, hHeroToCopy: CDOTA_BaseNPC_Hero, hModifierKeys: IllusionModifierKeys,
-                                 nNumIllusions: number, nPadding: number, bScramblePosition: boolean, bFindClearSpace: boolean): CDOTA_BaseNPC[];
+                                 nNumIllusions: number, nPadding: number, bScramblePosition: boolean, bFindClearSpace: boolean): Record<number, CDOTA_BaseNPC>;
 /**
  * Create a DOTA item
  */

@@ -652,7 +652,7 @@ declare abstract class CBodyComponent {
     SetVelocity(arg1: Vector): void;
 }
 /**
- * !Custom game event manager
+ * Custom game event manager
  */
 interface CCustomGameEventManager {
     /**
@@ -679,7 +679,7 @@ interface CCustomGameEventManager {
 declare const CustomGameEventManager: CCustomGameEventManager;
 
 /**
- * !Custom network table manager
+ * Custom network table manager
  */
 interface CCustomNetTableManager {
     /**
@@ -1619,7 +1619,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     SetWeatherEffectsDisabled(bDisable: boolean): void;
 }
 /**
- * !The Dota game manager
+ * The Dota game manager
  */
 interface CDOTAGameManager {
     /**
@@ -2018,7 +2018,7 @@ declare abstract class CDOTAPlayer extends CBaseAnimating {
 }
 
 /**
- * !DOTA Tutorial
+ * DOTA Tutorial
  */
 interface CDOTATutorial {
     /**
@@ -4025,7 +4025,7 @@ declare abstract class CDOTA_Buff {
     StartIntervalThink(flInterval: number): void;
 }
 /**
- * !Custom HUD manager
+ * Custom HUD manager
  */
 interface CDOTA_CustomUIManager {
     /**
@@ -4847,7 +4847,7 @@ declare abstract class CDotaSubquestBase extends CBaseEntity {
     SetTextReplaceValue(valueSlot: number, value: number): void;
 }
 /**
- * !The global list of entities
+ * The global list of entities
  */
 interface CEntities {
     /**
@@ -5072,7 +5072,7 @@ declare abstract class CSceneEntity extends CBaseEntity {
     Start(arg1: CBaseEntity): void;
 }
 /**
- * !The global list of heroes
+ * The global list of heroes
  */
 interface CScriptHeroList {
     /**
@@ -5091,7 +5091,7 @@ interface CScriptHeroList {
 declare const HeroList: CScriptHeroList;
 
 /**
- * !Used to create and manage particle effects
+ * Used to create and manage particle effects
  */
 interface CScriptParticleManager {
     /**
@@ -5162,7 +5162,7 @@ declare abstract class CScriptPrecacheContext {
     GetValue(arg1: string): any;
 }
 /**
- * !Access to convar functions
+ * Access to convar functions
  */
 interface Convars {
     /**
@@ -5219,7 +5219,7 @@ declare const Convars: Convars;
 
 
 /**
- * !The grid navigation system
+ * The grid navigation system
  */
 interface GridNav {
     /**
@@ -5313,7 +5313,7 @@ interface TrackingProjectileTable {
 }
 
 /**
- * !The projectile manager
+ * The projectile manager
  */
 interface ProjectileManager {
     /**
