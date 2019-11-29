@@ -1743,8 +1743,73 @@ declare enum modifierfunction {
      * GetTurnRateOverride
      */
     MODIFIER_PROPERTY_TURN_RATE_OVERRIDE,
+    // 7.23
+    /**
+     * OnDamagePrevented
+     */
+    MODIFIER_EVENT_ON_DEATH_PREVENTED,
+    /**
+     * GetAllowEtherealAttack
+     */
+    MODIFIER_PROPERTY_ALWAYS_ETHEREAL_ATTACK,
+    /** 
+     * GetModifierBaseAttackTimeConstant_Adjust
+     */
+    MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT_ADJUST,
+    /** 
+     * GetModifierPercentageCooldownOngoing
+     */
+    MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE_ONGOING,
+    /** 
+     * GetModifierDamageOutgoing_Percentage_Illusion_Amplify
+     */
+    MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE_ILLUSION_AMPLIFY,
+    /** 
+     * GetModifierExtraManaPercentage
+     */
+    MODIFIER_PROPERTY_EXTRA_MANA_PERCENTAGE,
+    /** 
+     * GetModifierLifestealRegenAmplify_Percentage
+     */
+    MODIFIER_PROPERTY_LIFESTEAL_AMPLIFY_PERCENTAGE,
+    /** 
+     * GetModifierMagicalResistanceBaseReduction
+     */
+    MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BASE_REDUCTION,
+    /** 
+     * GetModifierMagicalResistanceBonusIllusions
+     */
+    MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS_ILLUSIONS,
+    /** 
+     * GetModifierPhysicalArmorTotal_Percentage
+     */
+    MODIFIER_PROPERTY_PHYSICAL_ARMOR_TOTAL_PERCENTAGE,
+    /** 
+     * GetModifierProjectileSpeedBonusPercentage
+     */
+    MODIFIER_PROPERTY_PROJECTILE_SPEED_BONUS_PERCENTAGE,
+    /** 
+     * GetModifierRadarCooldownReduction
+     */
+    MODIFIER_PROPERTY_RADAR_COOLDOWN_REDUCTION,
+    /** 
+     * GetModifierBonusStats_Agility_Percentage
+     */
+    MODIFIER_PROPERTY_STATS_AGILITY_BONUS_PERCENTAGE,
+    /** 
+     * GetModifierBonusStats_Intellect_Percentage
+     */
+    MODIFIER_PROPERTY_STATS_INTELLECT_BONUS_PERCENTAGE,
+    /** 
+     * GetModifierBonusStats_Strength_Percentage
+     */
+    MODIFIER_PROPERTY_STATS_STRENGTH_BONUS_PERCENTAGE,
+    /** 
+     * GetModifierStrongIllusion
+     */
+    MODIFIER_PROPERTY_STRONG_ILLUSION,
     
-    MODIFIER_FUNCTION_LAST = 201,
+    MODIFIER_FUNCTION_LAST,
     MODIFIER_FUNCTION_INVALID = 255
 }
 
@@ -1806,7 +1871,8 @@ declare enum modifierstate {
     MODIFIER_STATE_ALLOW_PATHING_TROUGH_TREES,
     MODIFIER_STATE_IGNORING_MOVE_AND_ATTACK_ORDERS,
     MODIFIER_STATE_UNSLOWABLE,
-    MODIFIER_STATE_LAST = 40
+    MODIFIER_STATE_IGNORING_STOP_ORDERS,
+    MODIFIER_STATE_LAST
 }
 
 /** @compileMembersOnly */

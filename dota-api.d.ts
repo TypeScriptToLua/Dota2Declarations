@@ -1,10 +1,11 @@
 type QAngle = any;
 type Quaternion = any;
-type EntityID = number;
-type ProjectileID = number;
-type ParticleID = number;
-type EventListenerID = number;
-type CCustomGameEventListener = number;
+type EntityID = number & { _entityIdBrand: any };
+type ProjectileID = number & { _projectileIdBrand: any };
+type ParticleID = number & { _particleIdBrand: any };
+type EventListenerID = number & { _eventListenerBrand: any };
+type CCustomGameEventListener = number & { _customGameEventListenerBrand: any };
+type RealTimeCombatAnalyzerQuery = number & { _realTimeCombatAnalyzerQueryBrand: any };
 
 interface table {
     [key: string]: any;
@@ -874,6 +875,10 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
      * Get whether or not this ability is toggled on. True means that the ability is toggled on.
      */
     GetToggleState(): boolean;
+    /**
+     * [7.23]
+     */
+    GetUpgradeRecommended(): boolean;
     HeroXPChange(flXP: number): boolean;
     IncrementModifierRefCount(): void;
     /**
@@ -1070,6 +1075,10 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
      */
     SetStolen(bStolen: boolean): void;
     /**
+     * [7.23]
+     */
+    SetUpgradeRecommended(bUpgradeRecommended: boolean): void
+    /**
      * Set whether this ability's should consume resources when used (mana, gold, cooldown).
      */
     ShouldUseResources(): boolean;
@@ -1182,6 +1191,10 @@ interface TrackingProjectileEvent {
  * Base game mode class
  */
 declare abstract class CDOTABaseGameMode extends CBaseEntity {
+    /**
+     * [7.23] Begin tracking a sequence of events using the real time combat analyzer.
+     */
+    AddRealTimeCombatAnalyzerQuery(hQueryTable: any, hPlayer: CDOTAPlayer, pszQueryName: string): RealTimeCombatAnalyzerQuery;
     /**
      * Get if weather effects are disabled on the client.
      */
@@ -1342,6 +1355,18 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      * Is the day/night cycle disabled?
      */
     IsDaynightCycleDisabled(): boolean;
+    /**
+     * [7.23] Set function and context for real time combat analyzer query progress changed.
+     */
+    ListenForQueryProgressChanged(hFunction: any, hContext: any): void;
+    /**
+     * [7.23] Set function and context for real time combat analyzer query succeeded.
+     */
+    ListenForQuerySucceeded(hFunction: any, hContext: any): void;
+    /**
+     * [7.23] Stop tracking a combat analyzer query.
+     */
+    RemoveRealTimeCombatAnalyzerQuery(nQueryID: RealTimeCombatAnalyzerQuery): void;
     /**
      * Set a filter function to control the tuning values that abilities use. (Modify the table and Return true to use new values, return false to use the old values)
      */
@@ -1648,9 +1673,17 @@ interface CDOTAGameManager {
  */
 interface CDOTAGamerules {
     /**
+     * [7.23] Spawn a bot player of the passed hero name, player name, and team.
+     */
+    AddBotPlayerWithEntityScript(heroName: string, playerName: string, team: DOTATeam_t, entityScript: string): CDOTA_BaseNPC_Hero;
+    /**
      * Event-only ( string szNameSuffix, int nStars, int nMaxStars, int nExtraData1, int nExtraData2 )
      */
     AddEventMetadataLeaderboardEntry(arg1: string, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): boolean;
+    /**
+     * [7.23] Add an item to the whitelist.
+     */
+    AddItemToWhiteList(itemName: string): void;
     /**
      * Add a point on the minimap.
      */
@@ -1687,6 +1720,14 @@ interface CDOTAGamerules {
      * Indicate that the custom game setup phase is complete, and advance to the game.
      */
     FinishCustomGameSetup(): void;
+    /**
+     * [7.23] Spawn the next wave of creeps.
+     */
+    ForceCreepSpawn(): void;
+    /**
+     * [7.23] Transition game state to DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
+     */
+    ForceGameStart(): void;
     /**
      * Returns the difficulty level of the custom game mode
      */
@@ -1772,6 +1813,10 @@ interface CDOTAGamerules {
      */
     IsInBanPhase(): boolean;
     /**
+     * [7.23] Query an item in the whitelist
+     */
+    IsItemInWhiteList(itemName: string): boolean;
+    /**
      * Is it night stalker night-time?
      */
     IsNightstalkerNight(): boolean;
@@ -1800,9 +1845,25 @@ interface CDOTAGamerules {
      */
     Playtesting_UpdateAddOnKeyValues(): void;
     /**
+     * [7.23] Prepare Dota lane style spawners with a given interval.
+     */
+    PrepareSpawners(): void;
+    /**
+     * [7.23] Remove an item from the whitelist.
+     */
+    RemoveItemFromWhiteList(itemName: string): void;
+    /**
      * Restart after killing the ancient, etc.
      */
     ResetDefeated(): void;
+    /**
+     * [7.23] Restart gametime from 0.
+     */
+    ResetGameTime(): void;
+    /**
+     * [7.23] Restart at custom game setup.
+     */
+    ResetToCustomGameSetup(): void;
     /**
      * Restart the game at hero selection
      */
@@ -1975,6 +2036,14 @@ interface CDOTAGamerules {
      * Set wind direction
      */
     SetWeatherWindDirection(direction: Vector): void;
+    /**
+     * [7.23] Item whitelist functionality enable/disable.
+     */
+    SetWhiteListEnabled(enabled: boolean): void;
+    /**
+     * [7.23] Spawn and release the next creep wave from Dota lane style spawners.
+     */
+    SpawnAndReleaseCreeps(): void;
     /**
      * Get the current Gamerules state
      */
@@ -4645,14 +4714,11 @@ declare abstract class CDOTA_SimpleObstruction extends CBaseEntity {
      */
     SetEnabled(bEnabled: boolean, bForce: boolean): void;
 }
+
 /**
  * A courier.
  */
 declare abstract class CDOTA_Unit_Courier extends CDOTA_BaseNPC {
-    /**
-     * Upgrade to a flying courier
-     */
-    UpgradeToFlyingCourier(): boolean;
 }
 
 /**
