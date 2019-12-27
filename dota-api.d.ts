@@ -462,6 +462,14 @@ declare abstract class CBaseEntity extends CEntityInstance {
      */
     TakeDamage(hInfo: table): number;
     /**
+     * Transform point from entity space to world space.
+     */
+    TransformPointEntityToWorld(point: Vector): Vector;
+    /**
+     * Transform point from world space to entity space.
+     */
+    TransformPointWorldToEntity(point: Vector): Vector;
+    /**
      * Fires off this entity's OnTrigger responses.
      */
     Trigger(): void;
@@ -907,6 +915,10 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
      */
     IsHidden(): boolean;
     /**
+     * Returns whether this ability is a hidden secondary ability.
+     */
+    IsHiddenSecondaryAbility(): boolean;
+    /**
      * Returns whether the ability can be visible on the HUD when stolen by Rubick's Spell Steal.
      */
     IsHiddenWhenStolen(): boolean;
@@ -1077,7 +1089,7 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
     /**
      * [7.23]
      */
-    SetUpgradeRecommended(bUpgradeRecommended: boolean): void
+    SetUpgradeRecommended(bUpgradeRecommended: boolean): void;
     /**
      * Set whether this ability's should consume resources when used (mana, gold, cooldown).
      */
@@ -1356,6 +1368,10 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      */
     IsDaynightCycleDisabled(): boolean;
     /**
+     * [7.23] Set function and context for real time combat analyzer query failed.
+     */
+    ListenForQueryFailed(hFunction: any, hContext: any): void;
+    /**
      * [7.23] Set function and context for real time combat analyzer query progress changed.
      */
     ListenForQueryProgressChanged(hFunction: any, hContext: any): void;
@@ -1506,6 +1522,10 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      * Set the percentage rate that the fountain will regen mana. (-1 for default)
      */
     SetFountainPercentageManaRegen(flPercentageManaRegen: number): void;
+    /** 
+     * [7.23] If set to true, enable 7.23 free courier mode.
+    */
+    SetFreeCourierModeEnabled(bEnabled: boolean): void;
     /**
      * Allows clicks on friendly buildings to be handled normally.
      */
@@ -2056,6 +2076,10 @@ declare const GameRules: CDOTAGamerules;
  */
 declare abstract class CDOTAPlayer extends CBaseAnimating {
     /**
+     * Attempt to spawn the appropriate couriers for this mode.
+     */
+    CheckForCourierSpawning(hero: CDOTA_BaseNPC_Hero): void;
+    /**
      * Get the player's hero.
      */
     GetAssignedHero(): CDOTA_BaseNPC_Hero;
@@ -2449,6 +2473,11 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      */
     AddAbility(ability_name: string): CDOTABaseAbility;
     /**
+     * Add an activity modifier that affects future StartGesture calls.
+     * @param szName The name of the activity modifier to add, e.g. 'haste'.
+     */
+    AddActivityModifier(szName: string): void;
+    /**
      * Add an item to this unit's inventory.
      */
     AddItem(item_to_add: CDOTA_Item): CDOTA_Item;
@@ -2504,6 +2533,10 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Toggle an ability.
      */
     CastAbilityToggle(hAbility: CDOTABaseAbility, iPlayerIndex: number): void;
+    /**
+     * Clear Activity modifiers.
+     */
+    ClearActivityModifiers(): void;
     DestroyAllSpeechBubbles(): void;
     /**
      * Disassemble the passed item in this unit's inventory.
@@ -2691,6 +2724,9 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Get the XP bounty on this unit.
      */
     GetDeathXP(): number;
+    /**
+     * Attack speed expressed as constant value.
+     */
     GetDisplayAttackSpeed(): number;
     /**
      * Get this unit's evasion.
@@ -2749,6 +2785,10 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Get the dota game time where this unit last attacked in.
      */
     GetLastAttackTime(): number;
+    /**
+     * Get the last time this NPC took damage.
+     */
+    GetLastDamageTime(): number;
     /**
      * Get the last game time that this unit switched to/from idle state.
      */
@@ -2830,7 +2870,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
     /**
      * Returns current physical armor value.
      */
-    GetPhysicalArmorValue(): number;
+    GetPhysicalArmorValue(bIgnoreBase: boolean): number;
     /**
      * Returns the player that owns this unit.
      */
@@ -3052,6 +3092,11 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Is this unit an illusion?
      */
     IsIllusion(): boolean;
+    /**
+     * Ask whether this unit is in range of the specified shop.
+     * @param nShopType The type of shop.
+     * @param bPhysicallyNear Player must be physically near. (ignores courier?)
+     */
     IsInRangeOfShop(nShopType: DOTA_SHOP_TYPE, bPhysicallyNear: boolean): boolean;
     /**
      * Is this unit invisible?
@@ -3279,8 +3324,14 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
     ReduceMana(flAmount: number): void;
     /**
      * Remove an ability from this unit by name.
+     * @param pszAbilityName The name of the ability to remove.
      */
     RemoveAbility(pszAbilityName: string): void;
+    /**
+     * Remove the passed ability from this unit.
+     * @param ability The handle of the ability to remove.
+     */
+    RemoveAbilityByHandle(ability: C_DOTABaseAbility): void;
     /**
      * Remove the given gesture activity.
      */
@@ -3442,7 +3493,11 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Set the maximum gold bounty for this unit.
      */
     SetMaximumGoldBounty(iGoldBountyMax: number): void;
-    SetMaxMana(nMaxMany: number): void;
+    /**
+     * Set the maximum mana of this unit.
+     * @param nMaxMana The max amount of mana.
+     */
+    SetMaxMana(nMaxMana: number): void;
     /**
      * Set the minimum gold bounty for this unit.
      */
@@ -4230,6 +4285,11 @@ declare abstract class CDOTA_Item_DataDriven extends CDOTA_Item {
 
 /** @pureAbstract */
 declare abstract class CDOTA_Item_Lua extends CDOTA_Item {
+    /**
+     * Returns true if this item can be picked up by the target unit.
+     * @param hUnit Unit trying to pick up the item.
+     */
+    CanUnitPickUp(hUnit: CDOTA_BaseNPC): boolean;
     /**
      * Determine whether an issued command with no target is valid.
      */

@@ -410,10 +410,6 @@ declare function GetWorldMinX(): number;
  */
 declare function GetWorldMinY(): number;
 /**
- * If the given file doesn't exist, creates it with the given contents; does nothing if it exists
- */
-declare function InitLogFile(arg1: string, arg2: string): void;
-/**
  * Returns true if this is lua running from the client.dll.
  */
 declare function IsClient(): boolean;
