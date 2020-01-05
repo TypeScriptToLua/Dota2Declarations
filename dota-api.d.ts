@@ -4711,10 +4711,10 @@ interface CDOTA_PlayerResource {
     IsFakeClient(iPlayerID: PlayerID): boolean;
     IsHeroSelected(pHeroname: string): boolean;
     IsHeroSharedWithPlayerID(nUnitOwnerPlayerID: PlayerID, nOtherPlayerID: PlayerID): boolean;
-    IsValidPlayer(iPlayerID: PlayerID): boolean;
-    IsValidPlayerID(iPlayerID: PlayerID): boolean;
-    IsValidTeamPlayer(iPlayerID: PlayerID): boolean;
-    IsValidTeamPlayerID(iPlayerID: PlayerID): boolean;
+    IsValidPlayer(iPlayerID: number): iPlayerID is PlayerID;
+    IsValidPlayerID(iPlayerID: number): iPlayerID is PlayerID;
+    IsValidTeamPlayer(iPlayerID: number): iPlayerID is PlayerID;
+    IsValidTeamPlayerID(iPlayerID: number): iPlayerID is PlayerID;
     ModifyGold(iPlayerID: PlayerID, iGoldChange: number, bReliable: boolean, nReason: EDOTA_ModifyGold_Reason): number;
     NumPlayers(): number;
     NumTeamPlayers(): number;
@@ -4729,7 +4729,7 @@ interface CDOTA_PlayerResource {
     /**
      * (playerID, entity) - force the given player's camera to follow the given entity
      */
-    SetCameraTarget(nPlayerID: PlayerID, hTarget: CDOTA_BaseNPC | undefined): void;
+    SetCameraTarget(nPlayerID: PlayerID, hTarget: CBaseEntity | undefined): void;
     SetCanRepick(iPlayerID: PlayerID, bCanRepick: boolean): void;
     /**
      * Set the buyback cooldown for this player.
