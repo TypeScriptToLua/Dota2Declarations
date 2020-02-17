@@ -660,6 +660,7 @@ declare abstract class CBodyComponent {
     SetMaterialGroup(arg1: string): void;
     SetVelocity(arg1: Vector): void;
 }
+type CustomGameEventHandler<TEvent> = (this: void, userID: number, event: TEvent & { PlayerID: PlayerID }) => void;
 /**
  * Custom game event manager
  */
@@ -667,7 +668,11 @@ interface CCustomGameEventManager {
     /**
      * ( string EventName, func CallbackFunction ) - Register a callback to be called when a particular custom event arrives. Returns a listener ID that can be used to unregister later.
      */
-    RegisterListener(eventName: string, handler: (userID: number, event: table) => void): CCustomGameEventListener;
+    RegisterListener(eventName: string, handler: CustomGameEventHandler<table>): CCustomGameEventListener;
+    /**
+     * ( string EventName, func CallbackFunction ) - Register a callback to be called when a particular custom event arrives. Returns a listener ID that can be used to unregister later.
+     */
+    RegisterListener<TEvent>(eventName: string, handler: CustomGameEventHandler<TEvent>): CCustomGameEventListener;
     /**
      * ( string EventName, table EventData )
      */
