@@ -1123,6 +1123,10 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
     UseResources(bMana: boolean, bGold: boolean, bCooldown: boolean): void;
 }
 
+declare abstract class CScriptKeyValues {
+    GetValue(key: string): string;
+}
+
 interface AbilityTuningEvent {
     value: number;
     entindex_ability_const: EntityID;
