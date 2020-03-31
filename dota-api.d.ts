@@ -5020,43 +5020,43 @@ interface CEntities {
     /**
      * Find entities by class name. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindByClassname(previous: CBaseEntity | undefined, className: string): CBaseEntity;
+    FindByClassname(previous: CBaseEntity | undefined, className: string): CBaseEntity | undefined;
     /**
      * Find entities by class name nearest to a point.
      */
-    FindByClassnameNearest(className: string, location: Vector, radius: number): CBaseEntity;
+    FindByClassnameNearest(className: string, location: Vector, radius: number): CBaseEntity | undefined;
     /**
      * Find entities by class name within a radius. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindByClassnameWithin(previous: CBaseEntity | undefined, className: string, location: Vector, radius: number): CBaseEntity;
+    FindByClassnameWithin(previous: CBaseEntity | undefined, className: string, location: Vector, radius: number): CBaseEntity | undefined;
     /**
      * Find entities by model name. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindByModel(previous: CBaseEntity | undefined, modelName: string): CBaseEntity;
+    FindByModel(previous: CBaseEntity | undefined, modelName: string): CBaseEntity | undefined;
     /**
      * Find entities by model name within a radius. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindByModelWithin(previous: CBaseEntity | undefined, modelName: string, location: Vector, radius: number): CBaseEntity;
+    FindByModelWithin(previous: CBaseEntity | undefined, modelName: string, location: Vector, radius: number): CBaseEntity | undefined;
     /**
      * Find entities by name. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindByName(previous: CBaseEntity | undefined, name: string): CBaseEntity;
+    FindByName(previous: CBaseEntity | undefined, name: string): CBaseEntity | undefined;
     /**
      * Find entities by name nearest to a point.
      */
-    FindByNameNearest(name: string, location: Vector, radius: number): CBaseEntity;
+    FindByNameNearest(name: string, location: Vector, radius: number): CBaseEntity | undefined;
     /**
      * Find entities by name within a radius. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindByNameWithin(previous: CBaseEntity | undefined, name: string, location: Vector, radius: number): CBaseEntity;
+    FindByNameWithin(previous: CBaseEntity | undefined, name: string, location: Vector, radius: number): CBaseEntity | undefined;
     /**
      * Find entities by targetname. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindByTarget(previous: CBaseEntity | undefined, target: string): CBaseEntity;
+    FindByTarget(previous: CBaseEntity | undefined, target: string): CBaseEntity | undefined;
     /**
      * Find entities within a radius. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
      */
-    FindInSphere(previous: CBaseEntity | undefined, location: Vector, radius: number): CBaseEntity;
+    FindInSphere(previous: CBaseEntity | undefined, location: Vector, radius: number): CBaseEntity | undefined;
     /**
      * Begin an iteration over the list of entities
      */
