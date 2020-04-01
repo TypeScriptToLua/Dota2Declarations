@@ -1395,7 +1395,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control the tuning values that abilities use. (Modify the table and Return true to use new values, return false to use the old values)
      */
-    SetAbilityTuningValueFilter<T>(filterFunc: (context: T, event: AbilityTuningEvent) => boolean, context: T): void;
+    SetAbilityTuningValueFilter(filterFunc: (event: AbilityTuningEvent) => boolean, context: any): void;
     /**
      * Show the player hero's inventory in the HUD, regardless of what unit is selected.
      */
@@ -1427,7 +1427,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control the behavior when a bounty rune is picked up. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetBountyRunePickupFilter<T>(filterFunc: (context: T, event: BountyRunePickupEvent) => boolean, context: T): void;
+    SetBountyRunePickupFilter(filterFunc: (event: BountyRunePickupEvent) => boolean, context: any): void;
     /**
      * Set a cooldown for the team scan ability
      */
@@ -1490,7 +1490,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control the behavior when a unit takes damage. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetDamageFilter<T>(filterFunc: (context: T, event: DamageEvent) => boolean, context: T): void;
+    SetDamageFilter(filterFunc: (event: DamageEvent) => boolean, context: any): void;
     /**
      * Enable or disable the day/night cycle.
      */
@@ -1510,7 +1510,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control the behavior when a unit picks up an item. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetExecuteOrderFilter<T>(filterFunc: (context: T, order: ExecuteOrderEvent) => boolean, context: T): void;
+    SetExecuteOrderFilter(filterFunc: (order: ExecuteOrderEvent) => boolean, context: any): void;
     /**
      * Set a fixed delay for all players to respawn after.
      */
@@ -1550,7 +1550,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control the behavior when a unit heals. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetHealingFilter<T>(filterFunc: (context: T, event: HealingEvent) => boolean, context: T): void;
+    SetHealingFilter(filterFunc: (event: HealingEvent) => boolean, context: any): void;
     /**
      * Specify whether the default combat events will show in the HUD.
      */
@@ -1558,7 +1558,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control what happens to items that are added to an inventory, return false to cancel the event
      */
-    SetItemAddedToInventoryFilter<T>(filterFunc: (context: T, event: ItemAddedToInventoryEvent) => boolean, context: T): void;
+    SetItemAddedToInventoryFilter(filterFunc: (event: ItemAddedToInventoryEvent) => boolean, context: any): void;
     /**
      * Unknown
      */
@@ -1582,15 +1582,15 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control modifiers that are gained, return false to destroy modifier.
      */
-    SetModifierGainedFilter<T>(filterFunc: (context: T, event: ModifierGainedEvent) => boolean, context: T): void;
+    SetModifierGainedFilter(filterFunc: (event: ModifierGainedEvent) => boolean, context: any): void;
     /**
      * Set a filter function to control the behavior when a hero's experience is modified. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetModifyExperienceFilter<T>(filterFunc: (context: T, event: ModifyExperienceEvent) => boolean, context: T): void;
+    SetModifyExperienceFilter(filterFunc: (event: ModifyExperienceEvent) => boolean, context: any): void;
     /**
      * Set a filter function to control the behavior when a hero's gold is modified. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetModifyGoldFilter<T>(filterFunc: (context: T, event: ModifyGoldEvent) => boolean, context: T): void;
+    SetModifyGoldFilter(filterFunc: (event: ModifyGoldEvent) => boolean, context: any): void;
     /**
      * Set an override for the default selection entity, instead of each player's hero.
      */
@@ -1622,7 +1622,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control what rune spawns. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetRuneSpawnFilter<T>(filterFunc: (context: T, event: RuneSpawnEvent) => boolean, context: T): void;
+    SetRuneSpawnFilter(filterFunc: (event: RuneSpawnEvent) => boolean, context: any): void;
     /**
      * Enable/disable gold penalty for late picking.
      */
@@ -1654,7 +1654,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * Set a filter function to control when tracking projectiles are launched. (Modify the table and Return true to use new values, return false to cancel the event)
      */
-    SetTrackingProjectileFilter<T>(filterFunc: (context: T, event: TrackingProjectileEvent) => boolean, context: T): void;
+    SetTrackingProjectileFilter(filterFunc: (event: TrackingProjectileEvent) => boolean, context: any): void;
     /**
      * Enable or disable unseen fog of war. When enabled parts of the map the player has never seen will be completely hidden by fog of war.
      */
