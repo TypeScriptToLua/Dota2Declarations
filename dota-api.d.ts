@@ -317,6 +317,10 @@ declare abstract class CBaseEntity extends CEntityInstance {
      */
     GetSoundDuration(soundname: string, actormodel: string): number;
     /**
+     * Returns the spawn group handle of this entity.
+     */
+    GetSpawnGroupHandle(): number;
+    /**
      * Get the team number of this entity.
      */
     GetTeam(): DOTATeam_t;
@@ -1217,6 +1221,10 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      */
     AddRealTimeCombatAnalyzerQuery(hQueryTable: any, hPlayer: CDOTAPlayer, pszQueryName: string): RealTimeCombatAnalyzerQuery;
     /**
+     * Allocates an entity which can be used by custom games to control FoW occlusion.
+     */
+    AllocateFowBlockerRegion(minX: number, minY: number, maxX: number, maxY: number, gridSize: number): CFoWBlockerRegion;
+    /**
      * Get if weather effects are disabled on the client.
      */
     AreWeatherEffectsDisabled(): boolean;
@@ -1592,6 +1600,10 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      */
     SetModifyGoldFilter<T>(filterFunc: (context: T, event: ModifyGoldEvent) => boolean, context: T): void;
     /**
+     * Allow items to be sent to the neutral stash.
+     */
+    SetNeutralStashEnabled(enabled: boolean): void;
+    /**
      * Set an override for the default selection entity, instead of each player's hero.
      */
     SetOverrideSelectionEntity(hOverrideEntity: CDOTA_BaseNPC): void;
@@ -1627,6 +1639,10 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      * Enable/disable gold penalty for late picking.
      */
     SetSelectionGoldPenaltyEnabled(bEnabled: boolean): void;
+    /**
+     * Allow items to be sent to the stash.
+     */
+    SetSendToStashEnabled(enable: boolean): void;
     /**
      * Turn purchasing items to the stash off/on. If purchasing to the stash is off the player must be at a shop to purchase items.
      */
@@ -3184,6 +3200,10 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      */
     IsRealHero(): this is CDOTA_BaseNPC_Hero;
     /**
+     * Is this unit reincarnating?
+     */
+    IsReincarnating(): boolean;
+    /**
      * Is this unit rooted?
      */
     IsRooted(): boolean;
@@ -3340,7 +3360,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Remove the passed ability from this unit.
      * @param ability The handle of the ability to remove.
      */
-    RemoveAbilityByHandle(ability: C_DOTABaseAbility): void;
+    RemoveAbilityByHandle(ability: CDOTABaseAbility): void;
     /**
      * Remove the given gesture activity.
      */
@@ -4147,6 +4167,7 @@ declare abstract class CDOTA_Buff {
     IsDebuff(): boolean;
     IsHexDebuff(): boolean;
     IsStunDebuff(): boolean;
+    SendBuffRefreshToClients(): void;
     /**
      * (flTime, bInformClients)
      */
@@ -4236,6 +4257,7 @@ declare abstract class CDOTA_Item extends CDOTABaseAbility {
     IsStackable(): boolean;
     LaunchLoot(bAutoUse: boolean, flHeight: number, flDuration: number, vEndPoint: Vector): void;
     LaunchLootInitialHeight(bAutoUse: boolean, flInitialHeight: number, flLaunchHeight: number, flDuration: number, vEndPoint: Vector): void;
+    LaunchLootRequiredHeight(autoUse: boolean, requiredHeight: number, height: number, duration: number, endPoint: Vector): void;
     OnEquip(): void;
     OnUnequip(): void;
     RequiresCharges(): boolean;
@@ -5480,6 +5502,10 @@ interface ProjectileManager {
      */
     GetLinearProjectileVelocity(projectile: ProjectileID): Vector;
     /**
+     * Returns current location of the projectile.
+     */
+    GetTrackingProjectileLocation(projectile: ProjectileID): Vector;
+    /**
      * Makes the specified unit dodge projectiles
      */
     ProjectileDodge(unit: CDOTA_BaseNPC): void;
@@ -5515,4 +5541,15 @@ declare abstract class CScriptHTTPRequest {
      * Set the literal body of a post - invalid after setting a post parameter.
      */
     SetHTTPRequestRawPostBody(arg1: string, arg2: string): boolean;
+}
+
+interface CFoWBlockerRegion {
+    /**
+     * Sets or clears a blocker rectangle.
+     */
+    AddRectangularBlocker(mins: Vector, maxs: Vector, clearRegion: boolean): void;
+    /**
+     * Sets or clears a blocker rectangle outline.
+     */
+    AddRectangularOutlineBlocker(mins: Vector, maxs: Vector, clearRegion: boolean): void;
 }

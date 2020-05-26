@@ -164,6 +164,10 @@ declare abstract class CDOTA_Modifier_Lua extends CDOTA_Buff {
      */
     RemoveOnDeath(): boolean;
     /**
+     * [BP2020] No clue what this does.
+     */
+    SetHasCustomTransmitterData(hasCustomData: boolean): void;
+    /**
      * Apply the overhead offset to the attached effect.
      */
     ShouldUseOverheadOffset(): boolean;
@@ -356,6 +360,16 @@ declare abstract class CDOTA_Modifier_Lua extends CDOTA_Buff {
     GetModifierBountyCreepMultiplier(): number;
     // Not working
     GetModifierBountyOtherMultiplier(): number;
+    // Next block added with battle pass 2020
+    GetModifierManacostReduction_Constant(): number;
+    /**
+     * Return the name of the ability special value to override.
+     */
+    GetModifierOverrideAbilitySpecial(): string;
+    /**
+     * Return the value of the overridden ability special value.
+     */
+    GetModifierOverrideAbilitySpecialValue(): number;
 
     GetVisualZDelta(): number;
     /**

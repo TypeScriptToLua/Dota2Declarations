@@ -9,6 +9,10 @@ declare function AddFOWViewer(team: DOTATeam_t, location: Vector, radius: number
  */
 declare function AngleDiff(arg1: number, arg2: number): number;
 /**
+ * Generate a vector given a QAngles.
+ */
+declare function AnglesToVector(angles: QAngle): Vector;
+/**
  * Appends a string to a log file on the server
  */
 declare function AppendToLogFile(arg1: string, arg2: string): void;
@@ -42,6 +46,10 @@ declare function CalcDistanceToLineSegment2D(arg1: Vector, arg2: Vector, arg3: V
  * Create all I/O events for a particular entity
  */
 declare function CancelEntityIOEvents(arg1: CBaseEntity): void;
+/**
+ * Centers each players' camera on a unit.
+ */
+declare function CenterCameraOnUnit(playerId: PlayerID, unit: CDOTA_BaseNPC): void;
 /**
  * ( teamNumber )
  */
@@ -143,6 +151,10 @@ declare function CrossVectors(arg1: Vector, arg2: Vector): Vector;
  * Breaks in the debugger
  */
 declare function DebugBreak(): void;
+/**
+ * Creates a test unit controllable by the specified player.
+ */
+declare function DebugCreateUnit(arg1: object, arg2: string, arg3: number, arg4: boolean, arg5: object): number;
 /**
  * Draw a debug overlay box (origin, mins, maxs, forward, r, g, b, a, duration )
  */
@@ -315,6 +327,10 @@ declare function FireGameEventLocal(eventName: string, eventData: table): void;
  */
 declare function FrameTime(): number;
 /**
+ * Returns the currently active spawn group handle.
+ */
+declare function GetActiveSpawnGroupHandle(): number;
+/**
  * [DEPRECATED: Use GetDedicatedServerKeyV2 instead] Get the dedicated server secret based on some version seed.
  */
 declare function GetDedicatedServerKey(version: string): string;
@@ -377,6 +393,10 @@ declare function GetSystemTime(): string;
  * Get a target from an AOE location? Details unknown.
  */
 declare function GetTargetAOELocation(arg1: number, arg2: number, arg3: number, arg4: Vector, arg5: number, arg6: number, arg7: number): any;
+/**
+ * Get system time in milliseconds.
+ */
+declare function GetSystemTimeMS(): number;
 /**
  * Get a target from a linear location? Details unknown.
  */
@@ -562,6 +582,10 @@ declare function ResolveNPCPositions(arg1: Vector, arg2: number): void;
  */
 declare function RollPercentage(successPercentage: number): boolean;
 /**
+ * Roll based on a pseudo random chance, see: https://dota2.gamepedia.com/Random_distribution
+ */
+declare function RollPseudoRandomPercentage(chance: number, randomId: number, unit: CDOTA_BaseNPC): boolean;
+/**
  * Rotate a QAngle by another QAngle.
  */
 declare function RotateOrientation(arg1: QAngle, arg2: QAngle): QAngle;
@@ -649,6 +673,10 @@ declare function ShowMessage(arg1: string): void;
  * Spawn a shop trigger at a location.
  */
 declare function SpawnDOTAShopTriggerRadiusApproximate(location: Vector, radius: number): void;
+/**
+ * Asynchronously spawns a single entity from a table.
+ */
+declare function SpawnEntityFromTableAsynchronous(baseclass: string, data: table, unknown1: any, callback: () => void): void;
 /**
  * Synchronously spawns a single entity from a table
  */
