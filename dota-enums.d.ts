@@ -896,7 +896,9 @@ declare enum ParticleAttachment_t {
     PATTACH_MAIN_VIEW = 11,
     PATTACH_WATERWAKE = 12,
     PATTACH_CENTER_FOLLOW = 13,
-    MAX_PATTACH_TYPES = 14
+    PATTACH_CUSTOM_GAME_STATE_1 = 14,
+    PATTACH_HEALTHBAR = 15,
+    MAX_PATTACH_TYPES = 16,
 }
 
 /** @compileMembersOnly */
@@ -1050,6 +1052,10 @@ declare enum modifierfunction {
      * GetModifierCooldownReduction_Constant
      */
     MODIFIER_PROPERTY_COOLDOWN_REDUCTION_CONSTANT,
+    /**
+     * GetModifierManacostReduction_Constant
+     */
+    MODIFIER_PROPERTY_MANACOST_REDUCTION_CONSTANT,
     /**
      * GetModifierBaseAttackTimeConstant
      */
@@ -1808,7 +1814,14 @@ declare enum modifierfunction {
      * GetModifierStrongIllusion
      */
     MODIFIER_PROPERTY_STRONG_ILLUSION,
-    
+    /**
+     * GetModifierOverrideAbilitySpecial
+     */
+    MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL,
+    /**
+     * GetModifierOverrideAbilitySpecialValue
+     */
+    MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE,
     MODIFIER_FUNCTION_LAST,
     MODIFIER_FUNCTION_INVALID = 255
 }
@@ -1872,6 +1885,7 @@ declare enum modifierstate {
     MODIFIER_STATE_IGNORING_MOVE_AND_ATTACK_ORDERS,
     MODIFIER_STATE_UNSLOWABLE,
     MODIFIER_STATE_IGNORING_STOP_ORDERS,
+    MODIFIER_STATE_CANNOT_BE_MOTION_CONTROLLED,
     MODIFIER_STATE_LAST
 }
 
