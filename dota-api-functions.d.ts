@@ -100,7 +100,7 @@ declare function CreateIllusions(hOwner: CDOTA_BaseNPC, hHeroToCopy: CDOTA_BaseN
 /**
  * Create a DOTA item
  */
-declare function CreateItem(itemName: string, owner: CDOTAPlayer, purchaser: CDOTAPlayer): CDOTA_Item;
+declare function CreateItem(itemName: string, owner: CDOTAPlayer | undefined, purchaser: CDOTAPlayer | undefined): CDOTA_Item;
 /**
  * Create a physical item at a given location, can start in air (but doesn't clear a space)
  */
