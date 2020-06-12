@@ -291,7 +291,7 @@ declare function EmitSoundOnLocationWithCaster(arg1: Vector, arg2: string, arg3:
 /**
  * Turn an entity index integer to an HScript representing that entity's script instance.
  */
-declare function EntIndexToHScript(entIndex: number): CBaseEntity;
+declare function EntIndexToHScript<T = CBaseEntity>(entIndex: number): T | undefined;
 
 interface OrderTable {
     UnitIndex: EntityID;
