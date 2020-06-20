@@ -104,11 +104,11 @@ declare function CreateItem(itemName: string, owner: CDOTAPlayer | undefined, pu
 /**
  * Create a physical item at a given location, can start in air (but doesn't clear a space)
  */
-declare function CreateItemOnPositionForLaunch(location: Vector, item: CDOTA_Item): CDOTA_Item;
+declare function CreateItemOnPositionForLaunch(location: Vector, item: CDOTA_Item): CDOTA_Item_Physical;
 /**
  * Create a physical item at a given location
  */
-declare function CreateItemOnPositionSync(location: Vector, item: CDOTA_Item): CDOTA_Item;
+declare function CreateItemOnPositionSync(location: Vector, item: CDOTA_Item): CDOTA_Item_Physical;
 /**
  * Create a modifier not associated with an NPC. ( hCaster, hAbility, modifierName, paramTable, vOrigin, nTeamNumber, bPhantomBlocker )
  */

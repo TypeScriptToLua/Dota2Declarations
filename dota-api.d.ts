@@ -348,7 +348,7 @@ declare abstract class CBaseEntity extends CEntityInstance {
     /**
      * Is this entity a player?
      */
-    IsPlayer(): this is CBasePlayer;
+    IsPlayer(): this is CDOTAPlayer;
     /**
      * Detect if the entity has been deleted from C++.
      */
@@ -2133,6 +2133,10 @@ declare abstract class CDOTAPlayer extends CBaseAnimating {
      * Set the selected hero for this player
      */
     SetSelectedHero(heroName: string): void;
+    /**
+     * Spawn a courier for this player at the given position.
+     */
+    SpawnCourierAtPosition(vLocation: Vector): CDOTA_Unit_Courier;
 }
 
 /**
