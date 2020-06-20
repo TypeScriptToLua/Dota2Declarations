@@ -348,7 +348,7 @@ declare abstract class CBaseEntity extends CEntityInstance {
     /**
      * Is this entity a player?
      */
-    IsPlayer(): this is CBasePlayer;
+    IsPlayer(): this is CDOTAPlayer;
     /**
      * Detect if the entity has been deleted from C++.
      */
