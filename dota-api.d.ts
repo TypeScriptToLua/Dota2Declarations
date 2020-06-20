@@ -2133,6 +2133,10 @@ declare abstract class CDOTAPlayer extends CBaseAnimating {
      * Set the selected hero for this player
      */
     SetSelectedHero(heroName: string): void;
+    /**
+     * Spawn a courier for this player at the given position.
+     */
+    SpawnCourierAtPosition(vLocation: Vector): CDOTA_Unit_Courier;
 }
 
 /**
