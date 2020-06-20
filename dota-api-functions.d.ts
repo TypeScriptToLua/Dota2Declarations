@@ -216,7 +216,7 @@ declare function DestroyDamageInfo(arg1: table): void;
 /**
  * (hAttacker, hTarget, hAbility, fDamage, fRadius, effectName)
  */
-declare function DoCleaveAttack(attacker: CDOTA_BaseNPC, target: CDOTA_BaseNPC, ability: CDOTABaseAbility, damage: number, startRadius: number, endRadius: number, distance: number,
+declare function DoCleaveAttack(attacker: CDOTA_BaseNPC, target: CDOTA_BaseNPC, ability: CDOTABaseAbility | null | undefined, damage: number, startRadius: number, endRadius: number, distance: number,
                                 effectName: string): number;
 /**
  * #EntFire:Generate and entity i/o event
@@ -650,7 +650,7 @@ declare function ScreenShake(center: Vector, amplitude: number, frequency: numbe
 /**
  * ( DOTAPlayer sendToPlayer, int iMessageType, Entity targetEntity, int iValue, DOTAPlayer sourcePlayer ) - sendToPlayer and sourcePlayer can be nil - iMessageType is one of OVERHEAD_ALERT_*
  */
-declare function SendOverheadEventMessage(player: CDOTAPlayer, messageType: number, unit: CDOTA_BaseNPC, value: number, sourcePlayer: CDOTAPlayer): void;
+declare function SendOverheadEventMessage(player: CDOTAPlayer | null | undefined, messageType: OverheadAlerts_t, unit: CDOTA_BaseNPC, value: number, sourcePlayer: CDOTAPlayer | null | undefined): void;
 /**
  * Send a string to the console as a client command
  */
