@@ -1154,7 +1154,7 @@ interface DamageEvent {
 interface ExecuteOrderEvent {
     entindex_ability: EntityID;
     sequence_number_const: number;
-    queue: boolean;
+    queue: number; // 1 - true, 0 - false
     units: {[index: string]: EntityID};
     entindex_target: EntityID;
     position_x: number;
