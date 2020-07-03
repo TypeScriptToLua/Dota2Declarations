@@ -320,12 +320,12 @@ declare function FindClearSpaceForUnit(unit: CDOTA_BaseNPC, location: Vector, un
 /**
  * Find units that intersect the given line with the given flags.
  */
-declare function FindUnitsInLine(team: DOTATeam_t, startPos: Vector, endPos: Vector, cacheUnit: CBaseEntity|null, width: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
+declare function FindUnitsInLine(team: DOTATeam_t, startPos: Vector, endPos: Vector, cacheUnit: CBaseEntity | null | undefined, width: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
                                  flagFilter: DOTA_UNIT_TARGET_FLAGS): CDOTA_BaseNPC[];
 /**
  * Finds the units in a given radius with the given flags.
  */
-declare function FindUnitsInRadius(team: DOTATeam_t, location: Vector, cacheUnit: CBaseEntity|null, radius: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
+declare function FindUnitsInRadius(team: DOTATeam_t, location: Vector, cacheUnit: CBaseEntity | null | undefined, radius: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
                                    flagFilter: DOTA_UNIT_TARGET_FLAGS, order: FindType_t, canGrowCache: boolean): CDOTA_BaseNPC[];
 /**
  * Fire Entity's Action Input w/no data
