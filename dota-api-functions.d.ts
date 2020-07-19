@@ -134,10 +134,6 @@ declare function CreateTriggerRadiusApproximate(arg1: Vector, arg2: number): CBa
  */
 declare function CreateUniformRandomStream( iSeed: number ): CScriptUniformRandomStream;
 /**
- * Creates a separate random number stream.
- */
-declare function CreateUniformRandomStream( iSeed: number ): CScriptUniformRandomStream;
-/**
  * Creates a DOTA unit by its dota_npc_units.txt name
  */
 declare function CreateUnitByName(unit_name: string, location: Vector, find_clear_space: boolean, npc_owner: CBaseEntity | null | undefined, unit_owner: CDOTA_BaseNPC | null | undefined,
