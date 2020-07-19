@@ -66,6 +66,10 @@ declare abstract class CBaseAnimating extends CBaseModelEntity {
      */
     SequenceDuration(pSequenceName: string): number;
     /**
+     * Set the cycle of the animation.
+     */
+    SetCycle( flCycle: number ): void;
+    /**
      * Sets a bodygroup.
      */
     SetBodygroup(iGroup: number, iValue: number): void;
@@ -868,6 +872,10 @@ declare abstract class CDOTABaseAbility extends CBaseEntity {
      * Gets a value from this ability's special value block for a specific level.
      */
     GetLevelSpecialValueFor(valueName: string, nLevel: number): number;
+    /**
+     * Gets a value from this ability's special value block for a specific level.
+     */
+    GetLevelSpecialValueNoOverride(valueName: string, nLevel: number): number;
     /**
      * Get the ability's mana cost. Also allows dynamic setting of the ability's mana costs.
      */
@@ -3082,6 +3090,14 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      */
     IsCreep(): boolean;
     /**
+     * Is this unit controlled by LUA_MODIFIER_MOTION_HORIZONTAL
+     */
+    IsCurrentlyHorizontalMotionControlled(): boolean;
+    /**
+     * Is this unit controlled by LUA_MODIFIER_MOTION_VERTICAL
+     */
+    IsCurrentlyVerticalMotionControlled(): boolean;
+    /**
      * Is this unit can be denied?
      */
     IsDeniable(): boolean;
@@ -3352,6 +3368,10 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      */
     Purge(bRemovePositiveBuffs: boolean, bRemoveDebuffs: boolean, bFrameOnly: boolean, bRemoveStuns: boolean, bRemoveExceptions: boolean): void;
     /**
+     * Queue a response system concept with the TLK_DOTA_CUSTOM concept, after a delay.
+     */
+    QueueConcept(flDelay: number, hCriteriaTable: table, hCompletionCallbackFn: Function, hContext: any, hCallbackInfo: Function): void;
+    /**
      * Remove mana from this unit, this can be used for involuntary mana loss, not for mana that is spent.
      */
     ReduceMana(flAmount: number): void;
@@ -3365,6 +3385,10 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * @param ability The handle of the ability to remove.
      */
     RemoveAbilityByHandle(ability: CDOTABaseAbility): void;
+    /**
+     * Remove an ability from this unit by name.
+     */
+    RemoveAbilityFromIndexByName(pszAbilityName: string): void;
     /**
      * Remove the given gesture activity.
      */
@@ -3591,6 +3615,14 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      * Add the given gesture activity.
      */
     StartGesture(nActivity: GameActivity_t): void;
+    /**
+     * Add the given gesture activity faded according to its sequence settings.
+     */
+    StartGestureFadeWithSequenceSettings(nActivity: GameActivity_t): void;
+    /**
+     * Add the given gesture activity faded according to to the parameters.
+     */
+    StartGestureWithFade(nActivity: GameActivity_t, fFadeIn: number, fFadeOut: number): void;
     /**
      * Add the given gesture activity with a playback rate override.
      */
@@ -4253,6 +4285,7 @@ declare abstract class CDOTA_Item extends CDOTABaseAbility {
     IsItem(): this is CDOTA_Item;
     IsKillable(): boolean;
     IsMuted(): boolean;
+    IsNeutralDrop(): boolean;
     IsPermanent(): boolean;
     IsPurchasable(): boolean;
     IsRecipe(): boolean;
@@ -5493,6 +5526,10 @@ interface ProjectileManager {
      * Destroys the linear projectile matching the argument ID
      */
     DestroyLinearProjectile(projectile: ProjectileID): void;
+    /**
+     * Destroy a tracking projectile early
+     */
+    DestroyTrackingProjectile(projectile: ProjectileID): void;
     /**
      * Returns current location of projectile
      */

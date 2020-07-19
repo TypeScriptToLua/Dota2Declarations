@@ -148,6 +148,13 @@ declare function CreateUnitFromTable(arg1: table, arg2: Vector): CDOTA_BaseNPC;
  */
 declare function CrossVectors(arg1: Vector, arg2: Vector): Vector;
 /**
+ * Spawn a .vmap at the target location.  
+ * In addon_game_mode.lua, you can precache resource on `function SpawnGroupPrecache( hSpawnGroup, context )`.
+ * @param map NOTE: Don't include `maps/` in path
+ * @param b Unknow the meaning of this parameter
+ */
+declare function DOTA_SpawnMapAtPosition<T>(map: string, origin: Vector, b: boolean, readyCallback: (this:T, groupId: number) => void, completeCallback: (this:T, groupId: number) => void, context: T ): number;
+/**
  * Breaks in the debugger
  */
 declare function DebugBreak(): void;
@@ -228,6 +235,10 @@ declare function DoScriptAssert(arg1: boolean, arg2: string): void;
 declare function DoUniqueString(seed: string): string;
 declare function DotProduct(arg1: Vector, arg2: Vector): number;
 /**
+ * Drop a neutral item for the team of the hero at the given tier.
+ */
+declare function DropNeutralItemAtPositionForHero(itemName: string, origin: Vector, owner: CDOTA_BaseNPC, team: DOTATeam_t, b: boolean): CDOTA_Item_Physical;
+/**
  * Emit an announcer sound for all players.
  */
 declare function EmitAnnouncerSound(arg1: string): void;
@@ -250,15 +261,23 @@ declare function EmitGlobalSound(arg1: string): void;
 /**
  * Play named sound on Entity
  */
-declare function EmitSoundOn(soundname: string, ntity: CBaseEntity): void;
+declare function EmitSoundOn(soundname: string, entity: CBaseEntity): void;
 /**
  * Play named sound only on the client for the passed in player
  */
-declare function EmitSoundOnClient(arg1: string, arg2: CDOTAPlayer): void;
+declare function EmitSoundOnClient(soundname: string, player: CDOTAPlayer): void;
+/**
+ * Emit a sound on an entity for only a specific player
+ */
+declare function EmitSoundOnEntityForPlayer(soundname: string, entitiy: CBaseEntity, playerId: PlayerID): void;
 /**
  * Emit a sound on a location from a unit, only for players allied with that unit (vLocation, soundName, hCaster
  */
 declare function EmitSoundOnLocationForAllies(arg1: Vector, arg2: string, arg3: CDOTAPlayer): void;
+/**
+ * Emit a sound on a location for only a specific player
+ */
+declare function EmitSoundOnLocationForPlayer(soundname: string, origin: Vector, playerId: PlayerID): void;
 /**
  * Emit a sound on a location from a unit. (vLocation, soundName, hCaster).
  */
@@ -326,6 +345,10 @@ declare function FireGameEventLocal(eventName: string, eventData: table): void;
  * Get the time spent on the server in the last frame
  */
 declare function FrameTime(): number;
+/**
+ * Gets the ability texture name for an ability
+ */
+declare function GetAbilityTextureNameForAbility(name: string): string;
 /**
  * Returns the currently active spawn group handle.
  */
@@ -453,6 +476,10 @@ declare function IsMarkedForDeletion(arg1: CBaseEntity): boolean;
  * Returns true if this is lua running from the server.dll.
  */
 declare function IsServer(): boolean;
+/**
+ * Returns true if the unit is in a valid position in the gridnav.
+ */
+declare function IsUnitInValidPosition(unit: CDOTA_BaseNPC): boolean;
 /**
  * Checks to see if the given hScript is a valid entity
  */
@@ -809,7 +836,7 @@ declare function UnloadSpawnGroup(arg1: string): void;
 /**
  * Unload a spawn group by handle
  */
-declare function UnloadSpawnGroupByHandle(arg1: number): void;
+declare function UnloadSpawnGroupByHandle(groupId: number): void;
 declare function VectorAngles(arg1: Vector): QAngle;
 /**
  * Get Qangles (with no roll) for a Vector.
