@@ -132,7 +132,7 @@ declare function CreateTriggerRadiusApproximate(arg1: Vector, arg2: number): CBa
 /**
  * Creates a DOTA unit by its dota_npc_units.txt name
  */
-declare function CreateUnitByName(unit_name: string, location: Vector, find_clear_space: boolean, npc_owner: CBaseEntity | null | undefined, unit_owner: CDOTAPlayer | null | undefined,
+declare function CreateUnitByName(unit_name: string, location: Vector, find_clear_space: boolean, npc_owner: CBaseEntity | null | undefined, unit_owner: CDOTA_BaseNPC | null | undefined,
                                   team_number: DOTATeam_t): CDOTA_BaseNPC;
 /**
  * Creates a DOTA unit by its dota_npc_units.txt name
