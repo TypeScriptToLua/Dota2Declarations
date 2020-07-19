@@ -150,11 +150,12 @@ declare function CrossVectors(arg1: Vector, arg2: Vector): Vector;
 /**
  * Spawn a .vmap at the target location.  
  * In addon_game_mode.lua, you can precache resource on `function SpawnGroupPrecache( hSpawnGroup, context )`.
- * @param map NOTE: Don't include `maps/` in path.
+ * @param map The name of map in maps folder. NOTE: Don't include `maps/`.
+ * @param location The value of x and y must be multiple the grid size 64.
  * @param notAutoComplete If false, the map is automatically loaded, otherwise you need to call ManuallyTriggerSpawnGroupCompletion() to complete the loading.
  * @param readyCallback If notAutoComplete is false, it is not called.
  */
-declare function DOTA_SpawnMapAtPosition<T>(map: string, origin: Vector, notAutoComplete: boolean, readyCallback: (this:T, groupId: number) => void, completeCallback: (this:T, groupId: number) => void, context: T ): number;
+declare function DOTA_SpawnMapAtPosition<T>(map: string, location: Vector, notAutoComplete: boolean, readyCallback: (this:T, groupId: number) => void, completeCallback: (this:T, groupId: number) => void, context: T ): number;
 /**
  * Breaks in the debugger
  */
