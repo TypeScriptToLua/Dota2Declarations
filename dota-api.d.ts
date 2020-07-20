@@ -1185,6 +1185,8 @@ interface ItemAddedToInventoryEvent {
 }
 
 interface ModifierGainedEvent {
+    entindex_ability_const?: EntityID;
+    entindex_caster_const?: EntityID;
     entindex_parent_const: EntityID;
     duration: number;
     name_const: string;
