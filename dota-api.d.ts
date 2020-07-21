@@ -1,4 +1,3 @@
-type QAngle = any;
 type Quaternion = any;
 type EntityID = number & { _entityIdBrand: any };
 type ProjectileID = number & { _projectileIdBrand: any };
