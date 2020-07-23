@@ -1823,6 +1823,22 @@ declare enum modifierfunction {
      * GetModifierOverrideAbilitySpecialValue
      */
     MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE,
+    /**
+     * GetModifierSpellLifestealRegenAmplify_Percentage
+     */
+    MODIFIER_PROPERTY_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,
+    /**
+     * GetModifierManaDrainAmplify_Percentage
+     */
+    MODIFIER_PROPERTY_MANA_DRAIN_AMPLIFY_PERCENTAGE,
+    /**
+     * GetModifierAttackSpeedReductionPercentage
+     */
+    MODIFIER_PROPERTY_ATTACKSPEED_REDUCTION_PERCENTAGE,
+    /**
+     * GetModifierMoveSpeedReductionPercentage
+     */
+    MODIFIER_PROPERTY_MOVESPEED_REDUCTION_PERCENTAGE,
     MODIFIER_FUNCTION_LAST,
     MODIFIER_FUNCTION_INVALID = 255
 }
