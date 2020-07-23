@@ -129,6 +129,9 @@ declare function CreateTrigger(arg1: Vector, arg2: Vector, arg3: Vector): CBaseT
  * CreateTriggerRadiusApproximate( vecOrigin, flRadius ) : Creates and returns an AABB trigger thats bigger than the radius provided
  */
 declare function CreateTriggerRadiusApproximate(arg1: Vector, arg2: number): CBaseTrigger;
+/**
+ * Creates a separate random number stream.
+ */
 declare function CreateUniformRandomStream( iSeed: number ): CScriptUniformRandomStream;
 /**
  * Creates a DOTA unit by its dota_npc_units.txt name
