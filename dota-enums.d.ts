@@ -1844,7 +1844,7 @@ declare enum modifierfunction {
      */
     MODIFIER_PROPERTY_BONUSDAMAGEOUTGOING_PERCENTAGE,
     /**
-     * Unknow, GetAttackWhileMovingTarget?
+     * Unknow, GetModifierAttackWhileMovingTarget?
      */
     MODIFIER_PROPERTY_ATTACK_WHILE_MOVING_TARGET,
     MODIFIER_FUNCTION_LAST,
