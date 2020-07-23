@@ -1839,6 +1839,14 @@ declare enum modifierfunction {
      * GetModifierMoveSpeedReductionPercentage
      */
     MODIFIER_PROPERTY_MOVESPEED_REDUCTION_PERCENTAGE,
+    /**
+     * GetModifierBonusDamageOutgoing_Percentage
+     */
+    MODIFIER_PROPERTY_BONUSDAMAGEOUTGOING_PERCENTAGE,
+    /**
+     * Unknow, GetAttackWhileMovingTarget?
+     */
+    MODIFIER_PROPERTY_ATTACK_WHILE_MOVING_TARGET,
     MODIFIER_FUNCTION_LAST,
     MODIFIER_FUNCTION_INVALID = 255
 }
