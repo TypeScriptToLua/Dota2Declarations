@@ -5678,3 +5678,10 @@ interface CFoWBlockerRegion {
      */
     AddRectangularOutlineBlocker(mins: Vector, maxs: Vector, clearRegion: boolean): void;
 }
+
+declare abstract class CScriptUniformRandomStream {
+    RandomFloat(min: number, max: number): number;
+    RandomFloatExp(min: number, max: number, flExponent: number): number;
+    RandomInt(min: number, max: number): number;
+    RollPercentage(successPercentage: number): boolean;
+}
