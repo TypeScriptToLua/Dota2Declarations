@@ -1,4 +1,3 @@
-type QAngle = any;
 type Quaternion = any;
 type EntityID = number & { _entityIdBrand: any };
 type ProjectileID = number & { _projectileIdBrand: any };
@@ -1185,6 +1184,8 @@ interface ItemAddedToInventoryEvent {
 }
 
 interface ModifierGainedEvent {
+    entindex_ability_const?: EntityID;
+    entindex_caster_const?: EntityID;
     entindex_parent_const: EntityID;
     duration: number;
     name_const: string;
@@ -1695,6 +1696,54 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      * Set if weather effects are disabled.
      */
     SetWeatherEffectsDisabled(bDisable: boolean): void;
+    /**
+     * Add an item to purchase at a custom shop.
+     */
+    AddItemToCustomShop( pszItemName: string, pszShopName: string, pszCategory: string ): void;
+    /**
+     * Disable npc_dota_creature clumping behavior by default.
+     */
+    DisableClumpingBehaviorByDefault( bDisabled: boolean ): void;
+    /**
+     * Get the Game Seed passed from the GC.
+     */
+    GetEventGameSeed(): number;
+    /**
+     * Get the Event Window Start Time passed from the GC.
+     */
+    GetEventWindowStartTime(): number;
+    /**
+     * Remove an item to purchase at a custom shop.
+     */
+    RemoveItemFromCustomShop( pszItemName: string, pszShopName: string ): void;
+    /**
+     * Sets the camera Z range
+     */
+    SetCameraZRange( flMinZ: number, flMaxZ: number ): void;
+    /**
+     * Sets the default sticky item in the quickbuy
+     */
+    SetDefaultStickyItem( pItem: string ): void;
+    /**
+     * Prevent users from using the right click deny setting.
+     */
+    SetForceRightClickAttackDisabled( bDisabled: boolean ): void;
+    /**
+     * When enabled, undiscovered items in the neutral item stash are hidden.
+     */
+    SetNeutralItemHideUndiscoveredEnabled( bEnable: boolean ): void;
+    /**
+     * When enabled, the all neutral items tab cannot be viewed.
+     */
+    SetNeutralStashTeamViewOnlyEnabled( bEnable: boolean ): void;
+    /**
+     * Disables bonus items for randoming a hero.
+     */
+    SetRandomHeroBonusItemGrantDisabled( bDisabled: boolean ): void;
+    /**
+     * Sets the item which goes in the TP scroll slot
+     */
+    SetTPScrollSlotItemOverride( pItemName: string ): void;
 }
 /**
  * The Dota game manager
@@ -2101,6 +2150,15 @@ interface CDOTAGamerules {
      * Get the current Gamerules state
      */
     State_Get(): DOTA_GameState;
+    /**
+     * Event-only ( string szNameSuffix, int nScore, int nExtraData1, int nExtraData2 )
+     */
+    AddEventMetadataLeaderboardEntryRawScore(szNameSuffix: string, nScore: number, nExtraData1: number, nExtraData2: number, nExtraData3: number, nExtraData4: number, nExtraData5: number, nExtraData6: number): boolean;
+    /**
+     * Increase an item's stock count, clamped to item max (nTeamNumber, szItemName, nCount, nPlayerID .
+     */
+    IncreaseItemStock(nTeamNumber: DOTATeam_t, szItemName: string, nCount: number, nPlayerID: PlayerID): void;
+    
 }
 declare const GameRules: CDOTAGamerules;
 
@@ -3699,9 +3757,21 @@ declare abstract class CDOTA_BaseNPC_Creature extends CDOTA_BaseNPC {
      */
     CreatureLevelUp(iLevels: number): void;
     /**
+     * Set creature's current disable resistance
+     */
+    GetDisableResistance(): number;
+    /**
+     * Set creature's current disable resistance from ultimates
+     */
+    GetUltimateDisableResistance(): number;
+    /**
      * Is this unit a champion?
      */
     IsChampion(): boolean;
+    /**
+     * Is this creature respawning?
+     */
+    IsReincarnating(): boolean;
     /**
      * Remove all item drops from this creature.
      */
@@ -3726,6 +3796,10 @@ declare abstract class CDOTA_BaseNPC_Creature extends CDOTA_BaseNPC {
      * Set the damage gained per level on this creature.
      */
     SetDamageGain(nDamageGain: number): void;
+    /**
+     * Set creature's current disable resistance
+     */
+    SetDisableResistance( flDisableResistance: number ): void;
     /**
      * Set the disable resistance gained per level on this creature.
      */
@@ -3754,6 +3828,10 @@ declare abstract class CDOTA_BaseNPC_Creature extends CDOTA_BaseNPC {
      * Set the move speed gained per level on this creature.
      */
     SetMoveSpeedGain(nMoveSpeedGain: number): void;
+    /**
+     * Set creature's current disable resistance from ultimates
+     */
+    SetUltimateDisableResistance( flDisableResistance: number ): void;
     /**
      * Set the xp reward gained per level on this creature.
      */
@@ -4826,6 +4904,12 @@ interface CDOTA_PlayerResource {
     SpendGold(iPlayerID: PlayerID, iCost: number, iReason: EDOTA_ModifyGold_Reason): void;
     UpdateTeamSlot(iPlayerID: PlayerID, iTeamNumber: DOTATeam_t, desiredSlot: number): void;
     WhoSelectedHero(pHeroFilename: string): number;
+    AddNeutralItemToStash(iPlayerID: PlayerID, nTeamNumber: DOTATeam_t, hItem: CDOTA_Item): void;
+    GetEventGameCustomActionClaimCount(nPlayerID: PlayerID, nActionID: number): number;
+    GetEventGameCustomActionClaimCountByName(nPlayerID: PlayerID, nActionID: number): string;
+    GetLiveSpectatorTeam(nPlayerID: PlayerID): CBaseEntity;
+    HasSetEventGameCustomActionClaimCount(): boolean;
+    SetCustomIntParam(nPlayerID: PlayerID, iParam: number): void;
 }
 declare const PlayerResource: CDOTA_PlayerResource;
 
@@ -5593,4 +5677,11 @@ interface CFoWBlockerRegion {
      * Sets or clears a blocker rectangle outline.
      */
     AddRectangularOutlineBlocker(mins: Vector, maxs: Vector, clearRegion: boolean): void;
+}
+
+declare abstract class CScriptUniformRandomStream {
+    RandomFloat(min: number, max: number): number;
+    RandomFloatExp(min: number, max: number, flExponent: number): number;
+    RandomInt(min: number, max: number): number;
+    RollPercentage(successPercentage: number): boolean;
 }
