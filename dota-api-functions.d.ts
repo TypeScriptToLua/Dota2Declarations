@@ -560,8 +560,9 @@ declare function PrecacheModel(arg1: string, context: CScriptPrecacheContext): v
 declare function PrecacheResource(arg1: string, arg2: string, context: CScriptPrecacheContext): void;
 /**
  * Asynchronously precaches a DOTA unit by its dota_npc_units.txt name, provides a callback when it's finished.
+ * Providing PlayerID precaches hero with that player's cosmetics
  */
-declare function PrecacheUnitByNameAsync(unitName: string, callback: () => void, playerID: PlayerID): void;
+declare function PrecacheUnitByNameAsync(unitName: string, callback: () => void, playerID?: PlayerID): void;
 /**
  * Precaches a DOTA unit by its dota_npc_units.txt name
  */
