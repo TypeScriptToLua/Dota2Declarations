@@ -878,5 +878,8 @@ type OnlyFunctions<T> = Pick<T, {[P in keyof T]: T[P] extends Function ? P : nev
 
 /** Delayed lookup and execution of a function on an object. */
 declare function Dynamic_Wrap<T, K extends keyof OnlyFunctions<T>>(object: T, name: K): T[K];
-
+/**
+ * Triggers the creation of entities in a manually-completed spawn group
+ * @param id Spawn group id
+ */
 declare function ManuallyTriggerSpawnGroupCompletion( id: number ): void;

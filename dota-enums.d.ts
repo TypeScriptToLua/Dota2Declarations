@@ -1,6 +1,5 @@
 /** @compileMembersOnly */
 declare enum FindType_t {
-    FIND_UNITS_EVERYWHERE = -1,
     FIND_ANY_ORDER = 0,
     FIND_CLOSEST = 1,
     FIND_FARTHEST = 2
