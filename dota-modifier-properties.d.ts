@@ -439,4 +439,9 @@ declare abstract class CDOTA_Modifier_Lua extends CDOTA_Buff {
     // Not working
     GetModifierCanAttackTrees(): 0|1;
     GetModifierIgnoreMovespeedLimit(): 0|1;
+    GetModifierSpellLifestealRegenAmplify_Percentage(): number;
+    GetModifierManaDrainAmplify_Percentage(): number;
+    GetModifierAttackSpeedReductionPercentage(): number;
+    GetModifierMoveSpeedReductionPercentage(): number;
+    GetModifierBonusDamageOutgoing_Percentage(): number;
 }
