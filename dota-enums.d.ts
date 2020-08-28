@@ -1843,7 +1843,7 @@ declare enum modifierfunction {
      */
     MODIFIER_PROPERTY_BONUSDAMAGEOUTGOING_PERCENTAGE,
     /**
-     * Unknow, GetAttackWhileMovingTarget?
+     * Although this constant exists, there is no corresponding function name, maybe GetModifierAttackWhileMovingTarget?
      */
     MODIFIER_PROPERTY_ATTACK_WHILE_MOVING_TARGET,
     MODIFIER_FUNCTION_LAST,

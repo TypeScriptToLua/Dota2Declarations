@@ -216,7 +216,7 @@ declare function DestroyDamageInfo(arg1: table): void;
 /**
  * (hAttacker, hTarget, hAbility, fDamage, fRadius, effectName)
  */
-declare function DoCleaveAttack(attacker: CDOTA_BaseNPC, target: CDOTA_BaseNPC, ability: CDOTABaseAbility, damage: number, startRadius: number, endRadius: number, distance: number,
+declare function DoCleaveAttack(attacker: CDOTA_BaseNPC, target: CDOTA_BaseNPC, ability: CDOTABaseAbility | null | undefined, damage: number, startRadius: number, endRadius: number, distance: number,
                                 effectName: string): number;
 /**
  * #EntFire:Generate and entity i/o event
@@ -291,7 +291,7 @@ declare function EmitSoundOnLocationWithCaster(arg1: Vector, arg2: string, arg3:
 /**
  * Turn an entity index integer to an HScript representing that entity's script instance.
  */
-declare function EntIndexToHScript(entIndex: number): CBaseEntity;
+declare function EntIndexToHScript<T = CBaseEntity>(entIndex: number): T | undefined;
 
 interface OrderTable {
     UnitIndex: EntityID;
@@ -320,12 +320,12 @@ declare function FindClearSpaceForUnit(unit: CDOTA_BaseNPC, location: Vector, un
 /**
  * Find units that intersect the given line with the given flags.
  */
-declare function FindUnitsInLine(team: DOTATeam_t, startPos: Vector, endPos: Vector, cacheUnit: CBaseEntity|null, width: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
+declare function FindUnitsInLine(team: DOTATeam_t, startPos: Vector, endPos: Vector, cacheUnit: CBaseEntity | null | undefined, width: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
                                  flagFilter: DOTA_UNIT_TARGET_FLAGS): CDOTA_BaseNPC[];
 /**
  * Finds the units in a given radius with the given flags.
  */
-declare function FindUnitsInRadius(team: DOTATeam_t, location: Vector, cacheUnit: CBaseEntity|null, radius: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
+declare function FindUnitsInRadius(team: DOTATeam_t, location: Vector, cacheUnit: CBaseEntity | null | undefined, radius: number, teamFilter: DOTA_UNIT_TARGET_TEAM, typeFilter: DOTA_UNIT_TARGET_TYPE,
                                    flagFilter: DOTA_UNIT_TARGET_FLAGS, order: FindType_t, canGrowCache: boolean): CDOTA_BaseNPC[];
 /**
  * Fire Entity's Action Input w/no data
@@ -650,7 +650,7 @@ declare function ScreenShake(center: Vector, amplitude: number, frequency: numbe
 /**
  * ( DOTAPlayer sendToPlayer, int iMessageType, Entity targetEntity, int iValue, DOTAPlayer sourcePlayer ) - sendToPlayer and sourcePlayer can be nil - iMessageType is one of OVERHEAD_ALERT_*
  */
-declare function SendOverheadEventMessage(player: CDOTAPlayer, messageType: number, unit: CDOTA_BaseNPC, value: number, sourcePlayer: CDOTAPlayer): void;
+declare function SendOverheadEventMessage(player: CDOTAPlayer | null | undefined, messageType: OverheadAlerts_t, unit: CDOTA_BaseNPC, value: number, sourcePlayer: CDOTAPlayer | null | undefined): void;
 /**
  * Send a string to the console as a client command
  */
@@ -878,3 +878,8 @@ type OnlyFunctions<T> = Pick<T, {[P in keyof T]: T[P] extends Function ? P : nev
 
 /** Delayed lookup and execution of a function on an object. */
 declare function Dynamic_Wrap<T, K extends keyof OnlyFunctions<T>>(object: T, name: K): T[K];
+/**
+ * Triggers the creation of entities in a manually-completed spawn group
+ * @param id Spawn group id
+ */
+declare function ManuallyTriggerSpawnGroupCompletion( id: number ): void;

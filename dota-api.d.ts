@@ -256,7 +256,7 @@ declare abstract class CBaseEntity extends CEntityInstance {
     /**
      * GetContext( name ): looks up a context and returns it if available. May return string, float, or null (if the context isn't found).
      */
-    GetContext(name: string): any;
+    GetContext(name: string): string | number | null | undefined;
     /**
      * Get the forward vector of the entity.
      */
