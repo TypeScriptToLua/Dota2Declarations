@@ -1747,7 +1747,7 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
     /**
      * If set to true, neutral items will be dropped on killing neutral monsters. Otherwise nothing will be dropped.
      */
-    SetAllowNeutralItemDrops( bEnabled: string ): void;
+    SetAllowNeutralItemDrops( bEnabled: boolean ): void;
 }
 /**
  * The Dota game manager
