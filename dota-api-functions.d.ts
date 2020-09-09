@@ -3,7 +3,11 @@
 /**
  * Add temporary vision for a given team ( nTeamID, vLocation, flRadius, flDuration, bObstructedVision)
  */
-declare function AddFOWViewer(team: DOTATeam_t, location: Vector, radius: number, duration: number, obstructedVision: boolean): void;
+declare function AddFOWViewer(team: DOTATeam_t, location: Vector, radius: number, duration: number, obstructedVision: boolean): number;
+/**
+ * Remove temporary vision for a given team ( nTeamID, nViewerID )
+ */
+declare function RemoveFOWViewer(team: DOTATeam_t, viewerID: number): void;
 /**
  * Returns the number of degrees difference between two yaw angles
  */

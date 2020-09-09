@@ -1744,6 +1744,10 @@ declare abstract class CDOTABaseGameMode extends CBaseEntity {
      * Sets the item which goes in the TP scroll slot
      */
     SetTPScrollSlotItemOverride( pItemName: string ): void;
+    /**
+     * If set to true, neutral items will be dropped on killing neutral monsters. Otherwise nothing will be dropped.
+     */
+    SetAllowNeutralItemDrops( bEnabled: string ): void;
 }
 /**
  * The Dota game manager
@@ -2600,6 +2604,7 @@ declare abstract class CDOTA_BaseNPC extends CBaseFlex {
      */
     AttackReady(): boolean;
     BoundingRadius2D(): number;
+    CalculateGenericBonuses(): void;
     /**
      * Check FoW to see if an entity is visible.
      */
